@@ -1,0 +1,14 @@
+*.tres
+*.png
+*.aseprite
+.import/
+refs/
+info/
+objects/
+config
+debug
+description
+*.import
+HEAD
+
+
