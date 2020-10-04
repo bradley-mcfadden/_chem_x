@@ -1,14 +1,17 @@
 *.tres
+*.gif
 *.png
 *.aseprite
 .import/
 refs/
 info/
 objects/
+hooks/
 config
 debug
 description
 *.import
 HEAD
+*.sample
 
 
