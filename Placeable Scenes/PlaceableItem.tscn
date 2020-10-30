@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
-[ext_resource path="res://Assets/conveyor-belts-linear1.png" type="Texture" id=13]
+[ext_resource path="res://Assets/crate.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Conveyor-Belts/conveyor-belts-linear1.png" type="Texture" id=13]
 [ext_resource path="res://Scripts/PlaceableItem.gd" type="Script" id=17]
 
 [sub_resource type="SpriteFrames" id=1]
@@ -35,7 +35,7 @@ shape = SubResource( 2 )
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 0, -1 )
+visible = false
 shape = SubResource( 2 )
 disabled = true
 [connection signal="body_entered" from="Area2D" to="." method="_on_ghost_entered"]

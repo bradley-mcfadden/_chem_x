@@ -6,5 +6,5 @@ func _ready():
 	self.connect("button_up", self, "on_button_up")
 
 func on_button_up():
-	print('pressed')
+	# print('pressed')
 	emit_signal("button_up2", self)

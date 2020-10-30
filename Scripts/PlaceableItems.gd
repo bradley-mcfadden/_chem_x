@@ -3,7 +3,8 @@ var child_ids:Array
 var loaded_children:Array
 
 func _ready():
-	self.get_loaded_children()
+	# self.get_loaded_children()
+	pass
 
 func child_by_index(index):
 	if index < len(loaded_children) and index >= 0:

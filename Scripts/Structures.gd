@@ -1,17 +1,25 @@
 extends Node
 
+# signal struct_added(struct)
+
+signal clicked(machine, request)
+signal sound_requested(sound_name)
+
 var belts:Array
 var structures:Array
 var pollers
 var world_size:Vector2
+onready var connect_request_a = null
+onready var connect_request_b = null
 
 func _ready():
-	pass
+	for child in $SourceSinkGroup.get_children():
+		child.connect("connect_request", self, "_on_Connect_request")
 
 func setup_world_size(rect:Vector2):
 	world_size = rect
 	belts = []
-	belts.resize(rect.y)
+	belts.resize(int(rect.y))
 	for i in rect.y:
 		belts[i] = []
 		for j in rect.x:
@@ -19,13 +27,40 @@ func setup_world_size(rect:Vector2):
 	structures = belts.duplicate(true)
 
 func add_struct(struct, x, y):
+	if structures[y][x]:
+		struct.queue_free()
+		return
 	print('New structure at:', y, ' ', x)
+	structures[y][x] = struct
+	struct._start()
+#	for s in neighbour_tiles(Vector2(y, x)):
+#		var strx = structures[s.x][s.y]
+#		if strx and pointing_at(s, strx.output_dir):
+#			strx.connect_to_machine(struct)
+#	var opt = pointing_at(Vector2(y, x), struct.output_dir)
+#	if opt and structures[opt.x][opt.y]:
+#		struct.connect_to_machine(structures[opt.x][opt.y])
+	struct.connect("clicked", self, "_on_Struct_clicked")
+	struct.connect("connect_request", self, "_on_Connect_request")
+	
 
 func add_poller(poller, x, y):
 	print('New poller at:', y, ' ', x)
-	poller.n
+	# poller.n
 
 func add_belt(belt, x, y):
+	# structures[y][x] = belt
+	for s in neighbour_tiles(Vector2(y, x)):
+		var strx = structures[s.x][s.y]
+		if strx and pointing_at(s, strx.output_dir):
+			# strx.connect_to_machine(belt)
+			pass
+	var opt = pointing_at(Vector2(y, x), belt.output_dir)
+	if opt and structures[opt.x][opt.y]:
+		# belt.connect_to_machine(structures[opt.x][opt.y])
+		pass
+	#
+	#
 	print('New node at:', y, ' ', x)
 	if x < 0 or y < 0 or x >= world_size.x or y >= world_size.y:
 		belt.queue_free()
@@ -46,12 +81,15 @@ func add_belt(belt, x, y):
 	belts[y][x] = belt
 	for a in neighbour_tiles(Vector2(y, x)):
 		var n = belts[a.x][a.y]
-		if n and Vector2(y, x) == pointing_at(Vector2(a.x, a.y), n.get_facing()):
+		print (a, ' ', belts[a.x][a.y])
+		if n and Vector2(y, x) == pointing_at(a, n.get_facing()):
+			print('there is a source')
 			belt.new_source(n.get_facing())
 			
 	var sink = pointing_at(Vector2(y, x), belt.facing)
+	print('facing ', sink)
 	if belts[sink.x][sink.y]:
-		# print('there is a sink')
+		print('there is a sink')
 		belts[sink.x][sink.y].new_source(belt.facing)
 
 func neighbour_tiles(vec:Vector2) -> Array:
@@ -69,6 +107,33 @@ func pointing_at(vec:Vector2, direction:int):
 			return Vector2(vec.x + 1, vec.y)
 		Constants.Direction.WEST:
 			return Vector2(vec.x, vec.y - 1)
+		_:
+			return null
 
 func _on_Timer_timeout():
 	pass # Replace with function body.
+
+func _on_Struct_clicked(struct, request):
+	emit_signal("clicked", struct, request)
+
+func _on_Connect_request(machine):
+	if not connect_request_a:
+		connect_request_a = machine
+		return
+	if not connect_request_b:
+		var line = $Line2D.duplicate()
+		line.clear_points()
+		# line.global_position = connect_request_a.global_position
+		line.add_point(connect_request_a.global_position)
+		connect_request_b = machine
+		line.add_point(connect_request_b.global_position)
+		print(line.get_point_count())
+		$Connections.add_child(line)
+		line.visible = true
+		connect_request_a.connect_to_machine(connect_request_b)
+		clear_connect_requests()
+		emit_signal("sound_requested", "drill")
+
+func clear_connect_requests():
+	connect_request_a = null 
+	connect_request_b = null

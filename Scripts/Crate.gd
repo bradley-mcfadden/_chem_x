@@ -1,6 +1,6 @@
 extends "res://Scripts/PlaceableItem.gd"
 
-export var type:PackedScene = load("res://Entity.tscn") setget set_type
+export var type:PackedScene = load("res://Scenes/Entity.tscn") setget set_type
 export var count:int = 5000
 
 func get_item():

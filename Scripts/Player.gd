@@ -14,7 +14,7 @@ func _ready():
 	camera = $Camera2D
 	hud = $CanvasLayer/GUI
 
-func _input(event):
+func _input(_event):
 	direction = Vector2()
 	var change = false
 	if Input.is_action_pressed("move_north"):
