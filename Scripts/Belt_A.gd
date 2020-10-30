@@ -3,22 +3,18 @@ extends "res://Scripts/Machine.gd"
 class_name Belt_A
 
 enum Animat {LINEAR, LEFT_CORNER, RIGHT_CORNER}
-var facing:int
-var num_perp_sinks:int
-var animation_stack:Array
+onready var facing:int = Constants.Direction.NORTH
+onready var num_perp_sinks:int = 0
  
 func _ready():
-	facing = Constants.Direction.NORTH
-	num_perp_sinks = 0
-	animation_stack = []
-	animation_stack.push_back(Animat.LINEAR)
 	$Button.disabled = true
 
+# Adjust variables to match roation direction
 func rotate90():
 	self.rotate(PI/2)
 	facing = (facing + 1) % 4
 	output_dir = (output_dir + 1) % 4
-	print(round(rotation_degrees))
+	# print(round(rotation_degrees))
 
 func get_facing():
 	return facing
@@ -39,8 +35,9 @@ func reset():
 	num_perp_sinks = 0
 	set_linear()
 
+# Update animation to match inputs
 func new_source(direction:int):
-	print(direction, ' ', facing)
+	# print(direction, ' ', facing)
 	num_perp_sinks += 1
 	match direction:
 		Constants.Direction.NORTH:
@@ -79,7 +76,7 @@ func new_source(direction:int):
 			num_perp_sinks -= 1
 	if num_perp_sinks == 2 or direction == facing:
 		set_linear()
-	print('Num perp sinks:', num_perp_sinks)
+	# print('Num perp sinks:', num_perp_sinks)
 
 func add_multiple(list_facing:Array):
 	num_perp_sinks = 0
@@ -95,6 +92,7 @@ func _on_Button_pressed():
 		Global.CLICK_MODE.CONNECT:
 			emit_signal("connect_request", self)
 
+# Perform a lerp on item after moving receiving it from other machine
 func push_to_inventory(item):
 	# print(self, ' accepting ', item)
 	var _item_scene = load(item['path']).instance()
@@ -116,6 +114,4 @@ func push_to_inventory(item):
 	_item_scene.set_lerp_target(end_position, 0.5 * process_time)
 	yield(get_tree().create_timer(0.5 * process_time), "timeout")
 	inventory.push(item)
-	# print(self, ' ', inventory._to_string())
-	# print('sp ', start_position, ' ep ', end_position, ' gp ', global_position)
 	_item_scene.queue_free()

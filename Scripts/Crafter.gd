@@ -12,11 +12,13 @@ func set_current_recipe(recipe):
 		item_counts[k['id']] = 0
 	$Contents.texture = load(item['icon'])
 
+# Approves input if input item description matches expected input for
+#   current crafting recip
 func check_input(item):
 	# print(self, " checking input ", item, " ", inventory)
 	if not current_recipe:
 		return
-	print('checking input')
+	# print('checking input')
 	var found_flag = false
 	for ingr in current_recipe['ingredients']:
 		if item['id'] == ingr['id']:
@@ -24,10 +26,10 @@ func check_input(item):
 			break 
 	if found_flag:
 		emit_signal("input_response", true)
-		print('approved input')
+		# print('approved input')
 	else:
 		emit_signal("input_response", false)
-		print('denied input')
+		# print('denied input')
 
 func push_to_inventory(item):
 	# item.set_lerp_target(self.global_position, process_time)

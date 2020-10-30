@@ -12,7 +12,6 @@ onready var current_machine = null
 
 func _ready():
 	item_list.add_item('Recipe List', null, false)
-	#item_list.
 	var i := 1
 	for recipe in Global.get_recipe_table():
 		var item = Global.get_item(recipe['id'])
@@ -25,8 +24,6 @@ func _ready():
 		menu_idx_mapping[i] = recipe
 		item_list.add_item(name, load(item['icon']), true)
 		item_list.set_item_tooltip(i, ingredients)
-		# popup.add_icon_radio_check_item(txt, name, i)
-		# popup.set_item_tooltip(popup.get_item_count() - 1, ingredients)
 		i += 1
 
 func _on_ItemList_item_selected(index):

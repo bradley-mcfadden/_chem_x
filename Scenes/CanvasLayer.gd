@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-
+# Manages the GUI layers for various machines
 func _on_World_machine_clicked(machine, request):
 	match request:
 		"RECIPE":

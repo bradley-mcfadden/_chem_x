@@ -1,7 +1,7 @@
 [gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Placeable Scenes/Machine.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Placeable Scenes/Belt_A.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Belt_A.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Conveyor-Belts/conveyor-belts-corner7.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Conveyor-Belts/conveyor-belts-corner_left2.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Conveyor-Belts/conveyor-belts-linear3.png" type="Texture" id=5]
@@ -27,6 +27,7 @@
 [ext_resource path="res://Assets/Conveyor-Belts/conveyor-belts-linear8.png" type="Texture" id=25]
 [ext_resource path="res://Assets/Conveyor-Belts/conveyor-belts-corner_left1.png" type="Texture" id=26]
 [ext_resource path="res://Icons/conveyor-icon.png" type="Texture" id=27]
+
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {

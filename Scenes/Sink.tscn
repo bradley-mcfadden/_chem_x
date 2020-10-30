@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Placeable Scenes/PlaceableItem.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Sink.gd" type="Script" id=2]
-[ext_resource path="res://Assets/palette.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Tiles/palette.png" type="Texture" id=3]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/palette_icon.png-96163ea7318f2c641286126d1cbb3a3e.stex"

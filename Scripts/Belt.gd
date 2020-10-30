@@ -2,15 +2,12 @@ extends "res://Scripts/PlaceableItem.gd"
 class_name Belt
 
 enum Animat {LINEAR, LEFT_CORNER, RIGHT_CORNER}
-var facing:int
-var num_perp_sinks:int
-var animation_stack:Array
+
+onready var facing:int = Constants.Direction.NORTH
+onready var num_perp_sinks:int = 0
  
 func _ready():
-	facing = Constants.Direction.NORTH
-	num_perp_sinks = 0
-	animation_stack = []
-	animation_stack.push_back(Animat.LINEAR)
+	pass
 
 func rotate90():
 	self.rotate(PI/2)

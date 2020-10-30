@@ -4,11 +4,12 @@ signal item_selected(index)
 
 export var movespeed:int = int(192 / 60)
 
-var direction = Vector2()
-var camera:Camera2D
-var hud:MarginContainer
 var placeable_item:PackedScene
 var in_hand
+
+onready var direction := Vector2()
+onready var camera := $Camera2D
+onready var hud := $CanvasLayer/GUI
 
 func _ready():
 	camera = $Camera2D
@@ -36,9 +37,7 @@ func _input(_event):
 	if Input.is_action_pressed("zoom_out"):
 		camera.zoom -= Vector2(1.0/25, 1.0/25)
 	direction = direction.normalized()
-	# if event is InputEventMouseMotion:
-	# 	print(in_hand)
-	
+
 func _physics_process(_delta):
 	move_and_collide(direction * movespeed)
 

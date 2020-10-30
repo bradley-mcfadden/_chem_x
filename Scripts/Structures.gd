@@ -30,49 +30,38 @@ func add_struct(struct, x, y):
 	if structures[y][x]:
 		struct.queue_free()
 		return
-	print('New structure at:', y, ' ', x)
+	# print('New structure at:', y, ' ', x)
 	structures[y][x] = struct
 	struct._start()
-#	for s in neighbour_tiles(Vector2(y, x)):
-#		var strx = structures[s.x][s.y]
-#		if strx and pointing_at(s, strx.output_dir):
-#			strx.connect_to_machine(struct)
-#	var opt = pointing_at(Vector2(y, x), struct.output_dir)
-#	if opt and structures[opt.x][opt.y]:
-#		struct.connect_to_machine(structures[opt.x][opt.y])
 	struct.connect("clicked", self, "_on_Struct_clicked")
 	struct.connect("connect_request", self, "_on_Connect_request")
 	
 
-func add_poller(poller, x, y):
-	print('New poller at:', y, ' ', x)
-	# poller.n
+func add_poller(_poller, _x, _y):
+	print('New poller at:', _y, ' ', _x)
 
 func add_belt(belt, x, y):
-	# structures[y][x] = belt
 	for s in neighbour_tiles(Vector2(y, x)):
 		var strx = structures[s.x][s.y]
 		if strx and pointing_at(s, strx.output_dir):
-			# strx.connect_to_machine(belt)
 			pass
 	var opt = pointing_at(Vector2(y, x), belt.output_dir)
 	if opt and structures[opt.x][opt.y]:
-		# belt.connect_to_machine(structures[opt.x][opt.y])
 		pass
 	#
 	#
-	print('New node at:', y, ' ', x)
+	# print('New node at:', y, ' ', x)
 	if x < 0 or y < 0 or x >= world_size.x or y >= world_size.y:
 		belt.queue_free()
 		return
 	if belts[y][x]:
-		print('replacing belt')
+		# print('replacing belt')
 		var sink = pointing_at(Vector2(y, x), belts[y][x].facing)
-		print('Sink:', sink)
+		# print('Sink:', sink)
 		for b in neighbour_tiles(Vector2(y, x)):
-			print(b)
+			# print(b)
 			if belts[b.x][b.y] and b == sink:
-				print('b is sink')
+				# print('b is sink')
 				for a in neighbour_tiles(b):
 					if belts[a.x][a.y]:
 						belts[a.x][a.y].reset()
@@ -81,15 +70,15 @@ func add_belt(belt, x, y):
 	belts[y][x] = belt
 	for a in neighbour_tiles(Vector2(y, x)):
 		var n = belts[a.x][a.y]
-		print (a, ' ', belts[a.x][a.y])
+		# print (a, ' ', belts[a.x][a.y])
 		if n and Vector2(y, x) == pointing_at(a, n.get_facing()):
-			print('there is a source')
+			# print('there is a source')
 			belt.new_source(n.get_facing())
 			
 	var sink = pointing_at(Vector2(y, x), belt.facing)
-	print('facing ', sink)
+	# print('facing ', sink)
 	if belts[sink.x][sink.y]:
-		print('there is a sink')
+		# print('there is a sink')
 		belts[sink.x][sink.y].new_source(belt.facing)
 
 func neighbour_tiles(vec:Vector2) -> Array:

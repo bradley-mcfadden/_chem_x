@@ -12,19 +12,21 @@ func _ready():
 	item_table = load_items()
 	recipe_table = load_recipes()
 
+# Load item data from res://Data/items.json
 func load_items():
 	var item_file = File.new()
 	if not item_file.file_exists('res://Data/items.json'):
-		print('Returning from file read')
+		# print('Returning from file read')
 		return
 	item_file.open('res://Data/items.json', File.READ)
 	var string = item_file.get_as_text()
 	return parse_json(string)
 
+# Load recipe data from res://Data/recipes.json
 func load_recipes():
 	var recipe_file = File.new()
 	if not recipe_file.file_exists('res://Data/recipes.json'):
-		print('Returning from file read')
+		# print('Returning from file read')
 		return
 	recipe_file.open('res://Data/recipes.json', File.READ)
 	var string = recipe_file.get_as_text()
