@@ -1,6 +1,10 @@
 [gd_scene load_steps=29 format=2]
 
+<<<<<<< HEAD:Unused/Belt.tscn
 [ext_resource path="res://Unused/Belt.gd" type="Script" id=1]
+=======
+[ext_resource path="res://Scripts/Belt.gd" type="Script" id=1]
+>>>>>>> 4ddd17b96d8c8cf539b42cbeee5e8fab8e7977bf:Unused/Belt.tscn
 [ext_resource path="res://Placeable Scenes/PlaceableItem.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Conveyor-Belts/conveyor-belts-corner_left6.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Conveyor-Belts/conveyor-belts-corner2.png" type="Texture" id=4]
@@ -27,7 +31,10 @@
 [ext_resource path="res://Assets/Conveyor-Belts/conveyor-belts-linear7.png" type="Texture" id=25]
 [ext_resource path="res://Assets/Conveyor-Belts/conveyor-belts-linear6.png" type="Texture" id=26]
 [ext_resource path="res://Assets/Conveyor-Belts/conveyor-belts-corner_left5.png" type="Texture" id=27]
+<<<<<<< HEAD:Unused/Belt.tscn
 
+=======
+>>>>>>> 4ddd17b96d8c8cf539b42cbeee5e8fab8e7977bf:Unused/Belt.tscn
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
