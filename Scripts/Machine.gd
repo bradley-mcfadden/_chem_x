@@ -35,26 +35,11 @@ func _start():
 	timer.start()
 
 func push_to_inventory(item):
-	print(self, ' accepting ', item)
-	# var _item_scene = load(item['path']).instance()
-	# get_parent().add_child(_item_scene)
-	# _item_scene.global_position = global_position + Vector2(0, 16)
-	# _item_scene.set_lerp_target(self.global_position, process_time)
-	# print('before yield')
 	yield(get_tree().create_timer(process_time),"timeout")
-	# print('after yield')
 	inventory.push(item)
-	print(self, ' ', inventory._to_string())
-	# _item_scene.queue_free()
 
 func check_input(item):
-	# print(self, " checking input ", item, " ", inventory)
-	# print('ITEM:',item)
-	# print(inventory.is_full())
-	# print(inventory.is_empty())
 	if item and inventory.is_full() and item is Dictionary:
-		print(self, ' ACCEPTED INPUT')
-		# print()
 		emit_signal("input_response", true)
 	else:
 		print(self, ' DENIED INPUT')
@@ -72,7 +57,7 @@ func check_output_response(accept:bool):
 	if accept:
 		# print(self, ' passing ', item)
 		var item = inventory.pop()
-		print(self, ' passing ', item)
+		# print(self, ' passing ', item)
 		if not item:
 			return
 		emit_signal("pass_item", item)

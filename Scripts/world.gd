@@ -11,13 +11,10 @@ export var world_rect:Vector2 = Vector2(30, 20)
 
 onready var player := $Player
 onready var background := $BackgroundTiles
-onready var structures_node := $Background/Structures
+onready var structures_node := $BackgroundTiles/Structures
 
 func _ready():
-	background = $BackgroundTiles
-	player = $Player
 	structures = placeable_tiles.instance().get_loaded_children()
-	structures_node = $BackgroundTiles/Structures
 	player.setup_hotbar(structures)
 	structures_node.setup_world_size(world_rect)
 	Global.load_items()
@@ -48,13 +45,11 @@ func _input(_event):
 	if current_ghost:
 		var mouse_pos = get_global_mouse_position()
 		var mouse_pos_rounded = Vector2(round(mouse_pos.x), round(mouse_pos.y))
-		current_ghost.global_position = background.map_to_world(background.world_to_map(mouse_pos_rounded))
-		# print(background.world_to_map(current_ghost.global_position))
+		current_ghost.global_position = background.map_to_world(
+			background.world_to_map(mouse_pos_rounded))
 	if Input.is_action_just_pressed("rotate_item"):
 		if current_ghost and current_ghost.has_method("rotate90"):
 			current_ghost.rotate90()
-	#	else:
-	#		pass
 	if Input.is_action_just_pressed("clear_item"):
 		clear_current()
 	if Input.is_action_just_pressed("connect_mode"):

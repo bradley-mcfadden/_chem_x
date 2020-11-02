@@ -12,12 +12,12 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "Belt",
 "language": "GDScript",
-"path": "res://Scripts/Belt.gd"
+"path": "res://Unused/Belt.gd"
 }, {
 "base": "Node2D",
 "class": "Belt_A",
 "language": "GDScript",
-"path": "res://Placeable Scenes/Belt_A.gd"
+"path": "res://Scripts/Belt_A.gd"
 }, {
 "base": "Node",
 "class": "Constants",
@@ -51,7 +51,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Global="*res://Global.gd"
+Global="*res://Scripts/Global.gd"
 
 [display]
 

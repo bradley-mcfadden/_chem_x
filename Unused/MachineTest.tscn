@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/Sink.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Source.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Placeable Scenes/Machine.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Unused/MachineTest.gd" type="Script" id=4]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="Source" parent="." instance=ExtResource( 2 )]
+position = Vector2( 378, 277 )
+
+[node name="Machine" parent="." instance=ExtResource( 3 )]
+position = Vector2( 114, 72 )
+
+[node name="Machine2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 224, 126 )
+
+[node name="Machine3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 90, 219 )
+
+[node name="Sink" parent="." instance=ExtResource( 1 )]
+position = Vector2( 252, 46 )

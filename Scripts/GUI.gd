@@ -1,13 +1,14 @@
 extends MarginContainer
 
-export var columns:int = 9
-
 signal item_selected(index)
 
-var item_count:int = 0
+export var columns:int = 9
+
 var current_row:HBoxContainer
-var buttons:Array
-var AwareButton
+
+onready var item_count := 0
+onready var buttons := []
+onready var AwareButton = $AwareButton
 
 func _ready():
 	buttons = []

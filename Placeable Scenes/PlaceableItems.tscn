@@ -2,10 +2,13 @@
 
 [ext_resource path="res://Scripts/PlaceableItems.gd" type="Script" id=1]
 [ext_resource path="res://Placeable Scenes/Belt_A.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Placeable Scenes/Sink.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Sink.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Placeable Scenes/Poller.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Placeable Scenes/Source.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Source.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Placeable Scenes/Crafter.tscn" type="PackedScene" id=6]
+
+
+
 
 [node name="PlaceableItems" type="Node2D"]
 script = ExtResource( 1 )
