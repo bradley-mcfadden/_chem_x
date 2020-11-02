@@ -3,7 +3,6 @@
 [ext_resource path="res://Fonts/vt323_20.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Scripts/RecipeMenu.gd" type="Script" id=3]
 
-
 [node name="RecipeMenu" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0

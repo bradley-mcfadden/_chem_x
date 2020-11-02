@@ -1,6 +1,7 @@
 extends Node2D
 
 signal machine_clicked(machine, request)
+signal level_finished()
 
 var current_placeable:int
 var current_ghost:Node2D
@@ -8,16 +9,23 @@ var placeable_tiles = preload("res://Placeable Scenes/PlaceableItems.tscn")
 var structures:Array
 
 export var world_rect:Vector2 = Vector2(30, 20)
+export var production_goal := 100 # in units per min
 
 onready var player := $Player
 onready var background := $BackgroundTiles
 onready var structures_node := $BackgroundTiles/Structures
+onready var sinks := []
+onready var global_sum := 0
+onready var global_avg := 0.0
 
 func _ready():
 	structures = placeable_tiles.instance().get_loaded_children()
 	player.setup_hotbar(structures)
 	structures_node.setup_world_size(world_rect)
 	Global.load_items()
+	for child in $BackgroundTiles/Structures/SourceSinkGroup.get_children():
+		if child.has_method("get_count"):
+			sinks.append(child)
 
 func _unhandled_input(_event):
 	if Input.is_action_just_pressed("click"):
@@ -79,3 +87,12 @@ func _on_Structures_sound_requested(sound_name):
 	match sound_name:
 		"drill":
 			$Sounds/Drill.play()
+
+func _on_ScoringTimer_timeout():
+	var temp = 0
+	for sink in sinks:
+		temp += sink.get_count()
+	global_sum = temp
+	global_avg = global_sum / len(sinks)
+	if global_avg >= production_goal:
+		emit_signal("level_finished")

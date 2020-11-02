@@ -59,6 +59,9 @@ func check_input(item):
 	else:
 		emit_signal("input_response", false)
 
+func get_count():
+	return count
+
 func connect_to_machine(machine):
 	print("connected ", self, " to ", machine)
 	# warning-ignore:return_value_discarded
