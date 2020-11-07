@@ -9,7 +9,8 @@ var placeable_tiles = preload("res://Placeable Scenes/PlaceableItems.tscn")
 var structures:Array
 
 export var world_rect:Vector2 = Vector2(30, 20)
-export var production_goal := 100 # in units per min
+export var production_goal := 100.0 # in units per min
+export var production_item := ''
 
 onready var player := $Player
 onready var background := $BackgroundTiles
@@ -26,6 +27,8 @@ func _ready():
 	for child in $BackgroundTiles/Structures/SourceSinkGroup.get_children():
 		if child.has_method("get_count"):
 			sinks.append(child)
+			if not production_item == '':
+				child.set_current_item(production_item)
 
 func _unhandled_input(_event):
 	if Input.is_action_just_pressed("click"):

@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Unused/Accordion.gd" type="Script" id=1]
+[ext_resource path="res://Unused/Panel.gd" type="Script" id=2]
+
+
+
+[node name="Accordion2" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource( 1 )
+spacing = 5
+
+[node name="BGPanel" type="Panel" parent="."]
+anchor_right = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="show" type="Button" parent="."]
+anchor_right = 1.0
+margin_bottom = 20.0
+focus_mode = 0
+enabled_focus_mode = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="Control" parent="."]
+anchor_right = 1.0
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+anchor_right = 1.0
+rect_clip_content = true
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button2" type="Button" parent="MarginContainer/Panel/VBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="Button3" type="Button" parent="MarginContainer/Panel/VBoxContainer"]
+margin_top = 20.0
+margin_right = 1024.0
+margin_bottom = 40.0
+[connection signal="pressed" from="show" to="." method="toggle_bg_size"]
+[connection signal="pressed" from="show" to="MarginContainer/Panel" method="expand"]

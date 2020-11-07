@@ -28,14 +28,8 @@
 [ext_resource path="res://Assets/Conveyor-Belts/conveyor-belts-corner_left1.png" type="Texture" id=26]
 [ext_resource path="res://Icons/conveyor-icon.png" type="Texture" id=27]
 
-
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 26 ), ExtResource( 4 ), ExtResource( 18 ), ExtResource( 20 ), ExtResource( 12 ), ExtResource( 8 ), ExtResource( 14 ), ExtResource( 13 ) ],
-"loop": true,
-"name": "left_corner",
-"speed": 20.0
-}, {
 "frames": [ ExtResource( 16 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 19 ), ExtResource( 23 ), ExtResource( 17 ), ExtResource( 3 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "right_corner",
@@ -44,6 +38,11 @@ animations = [ {
 "frames": [ ExtResource( 15 ), ExtResource( 10 ), ExtResource( 5 ), ExtResource( 21 ), ExtResource( 24 ), ExtResource( 11 ), ExtResource( 22 ), ExtResource( 25 ) ],
 "loop": true,
 "name": "linear",
+"speed": 20.0
+}, {
+"frames": [ ExtResource( 26 ), ExtResource( 4 ), ExtResource( 18 ), ExtResource( 20 ), ExtResource( 12 ), ExtResource( 8 ), ExtResource( 14 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "left_corner",
 "speed": 20.0
 } ]
 
@@ -56,7 +55,7 @@ texture = ExtResource( 27 )
 [node name="AnimatedSprite" parent="." index="1"]
 frames = SubResource( 1 )
 animation = "linear"
-frame = 7
+frame = 5
 
 [node name="Area2D" parent="." index="2"]
 collision_layer = 1

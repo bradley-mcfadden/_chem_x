@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/AccordionScrollArea.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/RecipeAccordionMenu.gd" type="Script" id=2]
+[ext_resource path="res://Fonts/vt323_20.tres" type="DynamicFont" id=3]
+
+[node name="RecipeAccordionMenu" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 400.0
+margin_top = 200.0
+margin_right = -400.0
+margin_bottom = -200.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 224.0
+margin_bottom = 200.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 224.0
+margin_bottom = 200.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_right = 224.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
+custom_fonts/font = ExtResource( 3 )
+text = " Recipes"
+valign = 1
+
+[node name="AccordionScrollArea" parent="VBoxContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 24.0
+margin_right = 224.0
+margin_bottom = 170.0
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+margin_top = 174.0
+margin_right = 224.0
+margin_bottom = 200.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
+margin_right = 224.0
+margin_bottom = 26.0
+
+[node name="OK" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+margin_right = 110.0
+margin_bottom = 26.0
+focus_mode = 0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 3 )
+enabled_focus_mode = 0
+text = "OK"
+
+[node name="Close" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+margin_left = 114.0
+margin_right = 224.0
+margin_bottom = 26.0
+focus_mode = 0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 3 )
+enabled_focus_mode = 0
+text = "Close"
+[connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/OK" to="." method="_on_OK_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/Close" to="." method="_on_Close_pressed"]
