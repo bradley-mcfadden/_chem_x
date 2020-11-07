@@ -5,7 +5,7 @@
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/world_tiles.tres" type="TileSet" id=4]
 [ext_resource path="res://Sounds/place_block.wav" type="AudioStream" id=5]
-[ext_resource path="res://Scenes/RecipeMenu.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/RecipeAccordionMenu.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/ItemMenu.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scripts/CanvasLayer.gd" type="Script" id=8]
 [ext_resource path="res://Sounds/drill.wav" type="AudioStream" id=9]
@@ -62,7 +62,7 @@ script = ExtResource( 8 )
 [node name="ItemMenu" parent="CanvasLayer" instance=ExtResource( 7 )]
 visible = false
 
-[node name="RecipeMenu" parent="CanvasLayer" instance=ExtResource( 6 )]
+[node name="RecipeAccordionMenu" parent="CanvasLayer" instance=ExtResource( 6 )]
 visible = false
 
 [node name="Sounds" type="Node" parent="."]

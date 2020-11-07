@@ -30,10 +30,11 @@ func add_item(txt, icon):
 	var label := Button.new()
 	label.focus_mode = Control.FOCUS_NONE
 	label.align = Button.ALIGN_LEFT
+	# label.disabled = true
 	label.add_font_override("font", load("res://Fonts/vt323_20.tres"))
 	$Panel/VBoxContainer.add_child(label)
 	print('help')
-	label.text = '  ' + txt
+	label.text = txt
 	label.icon = icon
 	print(label.text)
 	$Panel.calculate_panel_size()

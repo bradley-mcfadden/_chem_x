@@ -5,9 +5,12 @@ func _on_World_machine_clicked(machine, request):
 	match request:
 		"RECIPE":
 			print('RECIPE')
-			$RecipeMenu.connect("recipe_selected", machine, "set_current_recipe")
-			$RecipeMenu.current_machine = machine
-			$RecipeMenu.visible = true
+			get_child(1).connect("recipe_selected", machine, "set_current_recipe")
+			get_child(1).current_machine = machine
+			get_child(1).visible = true
+			# $RecipeAccordionMenu.connect("recipe_selected", machine, "set_current_recipe")
+			# $RecipeAccordionMenu.current_machine = machine
+			# $RecipeAccordionMenu.visible = true
 		"ITEM":
 			print('ITEM')
 			$ItemMenu.connect("item_selected", machine, "set_current_item")
