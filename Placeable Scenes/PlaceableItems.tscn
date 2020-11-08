@@ -7,13 +7,28 @@
 [ext_resource path="res://Scenes/Source.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Placeable Scenes/Crafter.tscn" type="PackedScene" id=6]
 
-
-
-
 [node name="PlaceableItems" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="Poller" parent="." instance=ExtResource( 4 )]
+position = Vector2( 80, 16 )
+
+[node name="Poller2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 80, 16 )
+
+[node name="Poller3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 80, 16 )
+
+[node name="Poller4" parent="." instance=ExtResource( 4 )]
+position = Vector2( 80, 16 )
+
+[node name="Poller5" parent="." instance=ExtResource( 4 )]
+position = Vector2( 80, 16 )
+
+[node name="Poller6" parent="." instance=ExtResource( 4 )]
+position = Vector2( 80, 16 )
+
+[node name="Poller7" parent="." instance=ExtResource( 4 )]
 position = Vector2( 80, 16 )
 
 [node name="Belt_A" parent="." instance=ExtResource( 2 )]

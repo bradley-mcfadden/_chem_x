@@ -9,11 +9,11 @@ var in_hand
 
 onready var direction := Vector2()
 onready var camera := $Camera2D
-onready var hud := $CanvasLayer/GUI
+# onready var hud := $CanvasLayer/GUI
 
-func _ready():
-	camera = $Camera2D
-	hud = $CanvasLayer/GUI
+# func _ready():
+# 	camera = $Camera2D
+# 	hud = $CanvasLayer/GUI
 
 func _input(_event):
 	direction = Vector2()
@@ -41,9 +41,9 @@ func _input(_event):
 func _physics_process(_delta):
 	move_and_collide(direction * movespeed)
 
-func setup_hotbar(items):
-	# print(items)
-	hud.add_items(items)
+# func setup_hotbar(items):
+# 	# print(items)
+# 	hud.add_items(items)
 
 func _hotbar_selected(index):
 	emit_signal("item_selected", index)

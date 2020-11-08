@@ -8,6 +8,11 @@ var current_ghost:Node2D
 var placeable_tiles = preload("res://Placeable Scenes/PlaceableItems.tscn")
 var structures:Array
 
+var hammer_c = load("res://Icons/Hammer.png")
+var scissors_c = load("res://Icons/Scissors.png")
+var link_add_c = load("res://Icons/LinkAdd.png")
+var link_min_c = load("res://Icons/LinkMin.png")
+
 export var world_rect:Vector2 = Vector2(30, 20)
 export var production_goal := 100.0 # in units per min
 export var production_item := ''
@@ -21,7 +26,7 @@ onready var global_avg := 0.0
 
 func _ready():
 	structures = placeable_tiles.instance().get_loaded_children()
-	player.setup_hotbar(structures)
+	$CanvasLayer/Hotbar.add_items(structures)
 	structures_node.setup_world_size(world_rect)
 	Global.load_items()
 	for child in $BackgroundTiles/Structures/SourceSinkGroup.get_children():
@@ -58,18 +63,24 @@ func _input(_event):
 		var mouse_pos_rounded = Vector2(round(mouse_pos.x), round(mouse_pos.y))
 		current_ghost.global_position = background.map_to_world(
 			background.world_to_map(mouse_pos_rounded))
-	if Input.is_action_just_pressed("rotate_item"):
+	if Input.is_action_just_pressed("rotate_cw"):
 		if current_ghost and current_ghost.has_method("rotate90"):
 			current_ghost.rotate90()
-	if Input.is_action_just_pressed("clear_item"):
+	if Input.is_action_just_pressed("rotate_ccw"):
+		if current_ghost and current_ghost.has_method("rotateN90"):
+			current_ghost.rotateN90()
+	if Input.is_action_just_pressed("normal_mode"):
 		clear_current()
+		Input.set_custom_mouse_cursor(hammer_c)
 	if Input.is_action_just_pressed("connect_mode"):
 		Global.click_state = Global.CLICK_MODE.CONNECT
+		Input.set_custom_mouse_cursor(link_add_c)
 		$BackgroundTiles/Structures/Connections.visible = true
 	elif Input.is_action_just_released("connect_mode"):
 		Global.click_state = Global.CLICK_MODE.NORMAL
 		structures_node.clear_connect_requests()
 		$BackgroundTiles/Structures/Connections.visible = false
+		Input.set_custom_mouse_cursor(hammer_c)
 		
 func _instance_item(index):
 	clear_current()

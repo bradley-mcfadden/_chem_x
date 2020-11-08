@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/Structures.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/world.gd" type="Script" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://Sounds/drill.wav" type="AudioStream" id=9]
 [ext_resource path="res://Scenes/Sink.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Source.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Toolbar.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Hotbar.tscn" type="PackedScene" id=13]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 2 )
@@ -65,6 +67,10 @@ visible = false
 [node name="RecipeAccordionMenu" parent="CanvasLayer" instance=ExtResource( 6 )]
 visible = false
 
+[node name="Toolbar" parent="CanvasLayer" instance=ExtResource( 12 )]
+
+[node name="Hotbar" parent="CanvasLayer" instance=ExtResource( 13 )]
+
 [node name="Sounds" type="Node" parent="."]
 
 [node name="PlaceBlock" type="AudioStreamPlayer2D" parent="Sounds"]
@@ -80,5 +86,4 @@ autostart = true
 [connection signal="machine_clicked" from="." to="CanvasLayer" method="_on_World_machine_clicked"]
 [connection signal="clicked" from="BackgroundTiles/Structures" to="." method="_on_Structures_clicked"]
 [connection signal="sound_requested" from="BackgroundTiles/Structures" to="." method="_on_Structures_sound_requested"]
-[connection signal="item_selected" from="Player" to="." method="_instance_item"]
 [connection signal="timeout" from="ScoringTimer" to="." method="_on_ScoringTimer_timeout"]

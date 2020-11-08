@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Tiles/engineer.png" type="Texture" id=2]
-[ext_resource path="res://Scenes/GUI.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 16.0
@@ -22,8 +21,3 @@ shape = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="GUI" parent="CanvasLayer" instance=ExtResource( 3 )]
-[connection signal="item_selected" from="CanvasLayer/GUI" to="." method="_hotbar_selected"]

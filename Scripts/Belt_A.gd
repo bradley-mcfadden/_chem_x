@@ -16,6 +16,11 @@ func rotate90():
 	output_dir = (output_dir + 1) % 4
 	# print(round(rotation_degrees))
 
+func rotateN90():
+	self.rotate(-PI/2)
+	facing = (facing - 1) % 4
+	output_dir = (output_dir - 1) % 4
+
 func get_facing():
 	return facing
 

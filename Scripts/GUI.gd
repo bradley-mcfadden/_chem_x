@@ -23,7 +23,7 @@ func add_items(items):
 			current_row = HBoxContainer.new()
 			current_row.add_constant_override("hseparation", 10)
 			current_row.alignment = BoxContainer.ALIGN_CENTER
-			$VBoxContainer.add_child(current_row)
+			$Panel/VBoxContainer.add_child(current_row)
 		# add ImageTexture to current_row
 		var image_texture = item['texture']
 		var button = AwareButton.duplicate()

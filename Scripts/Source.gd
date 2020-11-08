@@ -3,7 +3,7 @@ extends "res://Scripts/PlaceableItem.gd"
 # class_name Source
 
 signal output_ready(item)
-signal input_response(accept)
+# signal input_response(accept)
 signal pass_item(item)
 
 signal clicked(machine, request)

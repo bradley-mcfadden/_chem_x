@@ -45,7 +45,7 @@ func place():
 	placed = true
 	$Button.visible = true
 
-func push_to_inventory(item):
+func push_to_inventory(_item):
 	yield(get_tree().create_timer(process_time),"timeout")
 	count += 1
 
