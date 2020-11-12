@@ -18,7 +18,7 @@ var inventory:Queue
 onready var placed:bool = false
 
 export var output_dir:int = Constants.Direction.SOUTH
-export var process_time:int = 1
+export var process_time:float = 1.0
 export var items:Array = []
 export var capacity:int = 10
 
@@ -30,13 +30,15 @@ func _ready():
 	for i in items:
 		inventory.push(i)
 	$Button.visible = false
+	# $Label.text(str(self))
 
 func _start():
 	timer.start()
 
 func push_to_inventory(item):
-	yield(get_tree().create_timer(process_time),"timeout")
-	inventory.push(item)
+	if not inventory.is_full():
+		# yield(get_tree().create_timer(process_time),"timeout")
+		inventory.push(item)
 
 func check_input(item):
 	if item and inventory.is_full() and item is Dictionary:
@@ -47,7 +49,7 @@ func check_input(item):
 
 func check_output():
 	if not Global.play_state == Global.MODE.PLAY:
-		return
+		return false
 	if inventory.is_empty():
 		var item = inventory.peek()
 		emit_signal("output_ready", item)

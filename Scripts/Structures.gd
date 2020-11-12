@@ -74,12 +74,13 @@ func add_belt(belt, x, y):
 		if n and Vector2(y, x) == pointing_at(a, n.get_facing()):
 			# print('there is a source')
 			belt.new_source(n.get_facing())
-			
 	var sink = pointing_at(Vector2(y, x), belt.facing)
 	# print('facing ', sink)
 	if belts[sink.x][sink.y]:
 		# print('there is a sink')
 		belts[sink.x][sink.y].new_source(belt.facing)
+	if belt.num_perp_sinks == 0:
+		belt.set_linear()
 
 func neighbour_tiles(vec:Vector2) -> Array:
 	var y = vec.x

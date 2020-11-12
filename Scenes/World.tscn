@@ -54,7 +54,6 @@ starting_item_id = "N9VKLuJZQgZyMw3P"
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 512, 304 )
 z_index = 10
-z_as_relative = false
 collision_layer = 1
 collision_mask = 1
 
@@ -86,4 +85,5 @@ autostart = true
 [connection signal="machine_clicked" from="." to="CanvasLayer" method="_on_World_machine_clicked"]
 [connection signal="clicked" from="BackgroundTiles/Structures" to="." method="_on_Structures_clicked"]
 [connection signal="sound_requested" from="BackgroundTiles/Structures" to="." method="_on_Structures_sound_requested"]
+[connection signal="item_selected" from="CanvasLayer/Hotbar" to="." method="_instance_item"]
 [connection signal="timeout" from="ScoringTimer" to="." method="_on_ScoringTimer_timeout"]

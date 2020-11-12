@@ -34,9 +34,11 @@ func _ready():
 			sinks.append(child)
 			if not production_item == '':
 				child.set_current_item(production_item)
+	Input.set_custom_mouse_cursor(hammer_c)
 
 func _unhandled_input(_event):
 	if Input.is_action_just_pressed("click"):
+		print('click')
 		if current_ghost and current_ghost.is_placeable == true: # and current_ghost.check_space_clear():
 			$Sounds/PlaceBlock.play()
 			var struct = current_ghost.duplicate()
@@ -48,8 +50,9 @@ func _unhandled_input(_event):
 				"Belt_A":
 					print('yes, adding a Belt_A')
 					struct.set_facing(current_ghost.get_facing())
-					structures_node.add_belt(struct, map_pos.x, map_pos.y)
+					# structures_node.add_belt(struct, map_pos.x, map_pos.y)
 					structures_node.add_struct(struct, map_pos.x, map_pos.y)
+					structures_node.add_belt(struct, map_pos.x, map_pos.y)
 				"Poller":
 					structures_node.add_poller(struct, map_pos.x, map_pos.y)
 				_:
@@ -63,12 +66,16 @@ func _input(_event):
 		var mouse_pos_rounded = Vector2(round(mouse_pos.x), round(mouse_pos.y))
 		current_ghost.global_position = background.map_to_world(
 			background.world_to_map(mouse_pos_rounded))
-	if Input.is_action_just_pressed("rotate_cw"):
+	if Input.is_action_just_pressed("rotate_ccw"):
+		print('yes')
+		if current_ghost and current_ghost.has_method("rotateN90"):
+			print('yesS')
+			current_ghost.rotateN90()
+	elif Input.is_action_just_pressed("rotate_cw"):
+		print('no')
 		if current_ghost and current_ghost.has_method("rotate90"):
 			current_ghost.rotate90()
-	if Input.is_action_just_pressed("rotate_ccw"):
-		if current_ghost and current_ghost.has_method("rotateN90"):
-			current_ghost.rotateN90()
+	
 	if Input.is_action_just_pressed("normal_mode"):
 		clear_current()
 		Input.set_custom_mouse_cursor(hammer_c)

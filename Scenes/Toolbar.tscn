@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Fonts/vt323_20.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Icons/Hammer.png" type="Texture" id=2]
@@ -8,10 +8,20 @@
 [ext_resource path="res://Icons/CClockwise.png" type="Texture" id=6]
 [ext_resource path="res://Icons/Clockwise.png" type="Texture" id=7]
 
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.49, 0.49, 0.49, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.1, 0.1, 0.1, 1 )
+border_blend = true
+
 [node name="Toolbar" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -24.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -19,6 +29,7 @@ __meta__ = {
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_right = 1000.0
 margin_bottom = 600.0
+mouse_filter = 2
 alignment = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -39,16 +50,17 @@ __meta__ = {
 }
 
 [node name="Panel" type="PanelContainer" parent="HBoxContainer/VBoxContainer/CenterContainer"]
-margin_left = -15.0
-margin_top = -137.0
-margin_right = 15.0
-margin_bottom = 137.0
+margin_left = -10.0
+margin_top = -132.0
+margin_right = 10.0
+margin_bottom = 132.0
+custom_styles/panel = SubResource( 4 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/CenterContainer/Panel"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 23.0
-margin_bottom = 267.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 262.0
 alignment = 1
 
 [node name="Build" type="TextureButton" parent="HBoxContainer/VBoxContainer/CenterContainer/Panel/VBoxContainer"]
