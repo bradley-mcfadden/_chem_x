@@ -42,6 +42,7 @@ margin_top = -16.0
 margin_right = 16.0
 margin_bottom = 16.0
 focus_mode = 0
+disabled = true
 enabled_focus_mode = 0
 flat = true
 __meta__ = {

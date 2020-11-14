@@ -2,9 +2,10 @@
 
 [ext_resource path="res://Placeable Scenes/PlaceableItem.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Poller.gd" type="Script" id=2]
-[ext_resource path="res://Assets/poller3.png" type="Texture" id=3]
-[ext_resource path="res://Assets/poller2.png" type="Texture" id=4]
-[ext_resource path="res://Assets/poller1.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Tiles/poller3.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Tiles/poller2.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Tiles/poller1.png" type="Texture" id=5]
+
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/poller.png-a009a87b4a962dbe3cc85d1780b15b2b.stex"

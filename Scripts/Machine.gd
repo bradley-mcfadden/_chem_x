@@ -25,26 +25,22 @@ export var capacity:int = 10
 func _ready():
 	timer = $Timer
 	timer.wait_time = process_time
-	# timer.start()
 	inventory = Queue.new(capacity)
 	for i in items:
 		inventory.push(i)
 	$Button.visible = false
-	# $Label.text(str(self))
 
 func _start():
 	timer.start()
 
 func push_to_inventory(item):
 	if not inventory.is_full():
-		# yield(get_tree().create_timer(process_time),"timeout")
 		inventory.push(item)
 
 func check_input(item):
 	if item and inventory.is_full() and item is Dictionary:
 		emit_signal("input_response", true)
 	else:
-		print(self, ' DENIED INPUT')
 		emit_signal("input_response", false)
 
 func check_output():
@@ -88,7 +84,6 @@ func place():
 	$Button.visible = true
 
 func _on_Button_pressed():
-	# print(Global.click_state)
 	match Global.click_state:
 		Global.CLICK_MODE.NORMAL:
 			emit_signal("clicked", self, 'RECIPE')

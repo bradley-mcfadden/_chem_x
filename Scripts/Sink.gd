@@ -32,13 +32,13 @@ func _ready():
 	make_structure()
 	_start()
 	place()
+	$Button.visible = false
 
 func _start():
 	timer.start()
 
 func set_current_item(item):
 	current_item = item
-	print('SET CURRENT ITEM TO ', item)
 	$Contents.texture = load(item['icon'])
 
 func place():

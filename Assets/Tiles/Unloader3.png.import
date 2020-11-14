@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/poller1.png-fd7952a407f857146d8bf38c35ff9803.stex"
+path="res://.import/Unloader3.png-fdbf834e204656562943a12cbc0531af.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/poller1.png"
-dest_files=[ "res://.import/poller1.png-fd7952a407f857146d8bf38c35ff9803.stex" ]
+source_file="res://Assets/Tiles/Unloader3.png"
+dest_files=[ "res://.import/Unloader3.png-fdbf834e204656562943a12cbc0531af.stex" ]
 
 [params]
 

@@ -38,7 +38,6 @@ func _ready():
 
 func _unhandled_input(_event):
 	if Input.is_action_just_pressed("click"):
-		print('click')
 		if current_ghost and current_ghost.is_placeable == true: # and current_ghost.check_space_clear():
 			$Sounds/PlaceBlock.play()
 			var struct = current_ghost.duplicate()
@@ -63,19 +62,23 @@ func _unhandled_input(_event):
 func _input(_event):
 	if current_ghost:
 		var mouse_pos = get_global_mouse_position()
-		var mouse_pos_rounded = Vector2(round(mouse_pos.x), round(mouse_pos.y))
-		current_ghost.global_position = background.map_to_world(
-			background.world_to_map(mouse_pos_rounded))
+		var mouse_pos_rounded = Vector2(int(mouse_pos.x), int(mouse_pos.y))
+		# the following code rounds the map coordinates up if the remainder 
+		# is greater than 15.
+		# this makes building more accurate.
+		var q = background.world_to_map(mouse_pos_rounded)
+		var r = Vector2(int(mouse_pos_rounded.x) % 32, int(mouse_pos_rounded.y) % 32)
+		if r.x > 15:
+			q.x += 1
+		if r.y > 15:
+			q.y += 1
+		current_ghost.global_position = background.map_to_world(q)
 	if Input.is_action_just_pressed("rotate_ccw"):
-		print('yes')
 		if current_ghost and current_ghost.has_method("rotateN90"):
-			print('yesS')
 			current_ghost.rotateN90()
 	elif Input.is_action_just_pressed("rotate_cw"):
-		print('no')
 		if current_ghost and current_ghost.has_method("rotate90"):
-			current_ghost.rotate90()
-	
+			current_ghost.rotate90()	
 	if Input.is_action_just_pressed("normal_mode"):
 		clear_current()
 		Input.set_custom_mouse_cursor(hammer_c)

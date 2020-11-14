@@ -31,6 +31,7 @@ func _ready():
 	place()
 	if not starting_item_id == '':
 		set_current_item(Global.get_item(starting_item_id))
+	$Button.visible = false
 
 func _start():
 	timer.start()
