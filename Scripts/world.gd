@@ -82,15 +82,33 @@ func _input(_event):
 	if Input.is_action_just_pressed("normal_mode"):
 		clear_current()
 		Input.set_custom_mouse_cursor(hammer_c)
-	if Input.is_action_just_pressed("connect_mode"):
+		$BackgroundTiles/Structures/Connections.visible = false
+	elif Input.is_action_just_pressed("connect_mode"):
+		clear_current()
 		Global.click_state = Global.CLICK_MODE.CONNECT
 		Input.set_custom_mouse_cursor(link_add_c)
 		$BackgroundTiles/Structures/Connections.visible = true
-	elif Input.is_action_just_released("connect_mode"):
-		Global.click_state = Global.CLICK_MODE.NORMAL
+		# reset structures node
 		structures_node.clear_connect_requests()
-		$BackgroundTiles/Structures/Connections.visible = false
-		Input.set_custom_mouse_cursor(hammer_c)
+	elif Input.is_action_just_pressed("disconnect_mode"):
+		clear_current()
+		Global.click_state = Global.CLICK_MODE.DISCONNECT
+		Input.set_custom_mouse_cursor(link_min_c)
+		$BackgroundTiles/Structures/Connections.visible = true
+	elif Input.is_action_just_pressed("cut_mode"):
+		clear_current()
+		Global.click_state = Global.CLICK_MODE.CUT
+		Input.set_custom_mouse_cursor(scissors_c)
+#	elif Input.is_action_just_released("connect_mode"):
+#		Global.click_state = Global.CLICK_MODE.NORMAL
+#		structures_node.clear_connect_requests()
+#		$BackgroundTiles/Structures/Connections.visible = false
+#		Input.set_custom_mouse_cursor(hammer_c)
+#	elif Input.is_action_just_released("disconnect_mode"):
+#		Global.click_state = Global.CLICK_MODE.NORMAL
+#		# clear disconnect requests
+#		$BackgroundTiles/Structures/Connections.visible = false
+#		Input.set_custom_mouse_cursor(hammer_c)
 		
 func _instance_item(index):
 	clear_current()

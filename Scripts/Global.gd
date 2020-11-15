@@ -1,7 +1,7 @@
 extends Node
 
 enum MODE {EDIT, PAUSE, PLAY}
-enum CLICK_MODE {CONNECT, NORMAL}
+enum CLICK_MODE {CONNECT, NORMAL, DISCONNECT, CUT}
 
 const LEVELS = ["res://Scenes/World0.tscn"]
 onready var play_state:int = MODE.PLAY

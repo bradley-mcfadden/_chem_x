@@ -35,7 +35,6 @@ func add_struct(struct, x, y):
 	struct._start()
 	struct.connect("clicked", self, "_on_Struct_clicked")
 	struct.connect("connect_request", self, "_on_Connect_request")
-	
 
 func add_poller(_poller, _x, _y):
 	print('New poller at:', _y, ' ', _x)
