@@ -32,10 +32,6 @@ func check_input(item):
 		# print('denied input')
 
 func push_to_inventory(item):
-	# item.set_lerp_target(self.global_position, process_time)
-	# print('before yield')
-	# yield(get_tree().create_timer(process_time),"timeout")
-	# print('after yield')
 	item_counts[item['id']] += 1
 
 func check_output():

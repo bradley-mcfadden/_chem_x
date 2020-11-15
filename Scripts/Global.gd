@@ -9,6 +9,13 @@ onready var click_state:int = CLICK_MODE.NORMAL
 onready var item_table:Array
 onready var recipe_table:Array
 
+const CM_TO_STR := {
+	CLICK_MODE.CONNECT   : 'CONNECT',
+	CLICK_MODE.NORMAL    : 'NORMAL',
+	CLICK_MODE.DISCONNECT: 'DISCONNECT',
+	CLICK_MODE.CUT       : 'CUT'
+}
+
 func _ready():
 	item_table = load_items()
 	recipe_table = load_recipes()

@@ -47,9 +47,8 @@ func _unhandled_input(_event):
 			var map_pos = background.world_to_map(current_ghost.global_position)
 			match structures[current_placeable]['name']:
 				"Belt_A":
-					print('yes, adding a Belt_A')
+					# print('yes, adding a Belt_A')
 					struct.set_facing(current_ghost.get_facing())
-					# structures_node.add_belt(struct, map_pos.x, map_pos.y)
 					structures_node.add_struct(struct, map_pos.x, map_pos.y)
 					structures_node.add_belt(struct, map_pos.x, map_pos.y)
 				"Poller":
@@ -81,6 +80,7 @@ func _input(_event):
 			current_ghost.rotate90()	
 	if Input.is_action_just_pressed("normal_mode"):
 		clear_current()
+		Global.click_state = Global.CLICK_MODE.NORMAL
 		Input.set_custom_mouse_cursor(hammer_c)
 		$BackgroundTiles/Structures/Connections.visible = false
 	elif Input.is_action_just_pressed("connect_mode"):
@@ -99,16 +99,7 @@ func _input(_event):
 		clear_current()
 		Global.click_state = Global.CLICK_MODE.CUT
 		Input.set_custom_mouse_cursor(scissors_c)
-#	elif Input.is_action_just_released("connect_mode"):
-#		Global.click_state = Global.CLICK_MODE.NORMAL
-#		structures_node.clear_connect_requests()
-#		$BackgroundTiles/Structures/Connections.visible = false
-#		Input.set_custom_mouse_cursor(hammer_c)
-#	elif Input.is_action_just_released("disconnect_mode"):
-#		Global.click_state = Global.CLICK_MODE.NORMAL
-#		# clear disconnect requests
-#		$BackgroundTiles/Structures/Connections.visible = false
-#		Input.set_custom_mouse_cursor(hammer_c)
+		$BackgroundTiles/Structures/Connections.visible = false
 		
 func _instance_item(index):
 	clear_current()

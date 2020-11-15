@@ -27,6 +27,10 @@ func add_items(items):
 		# add ImageTexture to current_row
 		var image_texture = item['texture']
 		var button = AwareButton.duplicate()
+		var iea := InputEventAction.new()
+		iea.action = "hotbar_" + str(item_count % columns)
+		button.shortcut = ShortCut.new()
+		button.shortcut.shortcut = iea
 		button.texture_normal = image_texture
 		button.visible = true
 		button.connect("button_up2", self, "_on_hotbar_clicked")

@@ -8,8 +8,8 @@ onready var num_perp_sinks:int = 0
 onready var e_inventory = Queue.new(capacity)
 onready var hitbox_lock = false
 
-func _ready():
-	$Button.disabled = true
+# func _ready():
+# 	$Button.disabled = true
 
 # func _start():
 # 	pass
@@ -162,12 +162,9 @@ func add_multiple(list_facing:Array):
 		new_source(l)
 
 func _on_Button_pressed():
-	# print(Global.click_state)
-	match Global.click_state:
-		Global.CLICK_MODE.NORMAL:
-			pass
-		Global.CLICK_MODE.CONNECT:
-			emit_signal("connect_request", self)
+	if Global.click_state == Global.CLICK_MODE.NORMAL:
+		return
+	._on_Button_pressed()
 
 func check_output_response(accept:bool):
 	if not inventory.is_empty():

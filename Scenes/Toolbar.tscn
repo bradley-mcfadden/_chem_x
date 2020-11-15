@@ -8,7 +8,7 @@
 [ext_resource path="res://Icons/CClockwise.png" type="Texture" id=6]
 [ext_resource path="res://Icons/Clockwise.png" type="Texture" id=7]
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.49, 0.49, 0.49, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -50,22 +50,22 @@ __meta__ = {
 }
 
 [node name="Panel" type="PanelContainer" parent="HBoxContainer/VBoxContainer/CenterContainer"]
-margin_left = -10.0
-margin_top = -132.0
-margin_right = 10.0
-margin_bottom = 132.0
-custom_styles/panel = SubResource( 4 )
+margin_left = -11.0
+margin_top = -136.0
+margin_right = 11.0
+margin_bottom = 136.0
+custom_styles/panel = SubResource( 1 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/CenterContainer/Panel"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 18.0
-margin_bottom = 262.0
+margin_right = 20.0
+margin_bottom = 270.0
 alignment = 1
 
 [node name="Build" type="TextureButton" parent="HBoxContainer/VBoxContainer/CenterContainer/Panel/VBoxContainer"]
-margin_right = 16.0
-margin_bottom = 16.0
+margin_right = 18.0
+margin_bottom = 18.0
 texture_normal = ExtResource( 2 )
 stretch_mode = 5
 __meta__ = {
@@ -73,9 +73,9 @@ __meta__ = {
 }
 
 [node name="Build_l" type="Label" parent="HBoxContainer/VBoxContainer/CenterContainer/Panel/VBoxContainer"]
-margin_top = 20.0
-margin_right = 16.0
-margin_bottom = 40.0
+margin_top = 22.0
+margin_right = 18.0
+margin_bottom = 42.0
 custom_fonts/font = ExtResource( 1 )
 text = "z"
 align = 1
@@ -84,57 +84,57 @@ __meta__ = {
 }
 
 [node name="Cut" type="TextureButton" parent="HBoxContainer/VBoxContainer/CenterContainer/Panel/VBoxContainer"]
-margin_top = 44.0
-margin_right = 16.0
-margin_bottom = 60.0
+margin_top = 46.0
+margin_right = 18.0
+margin_bottom = 64.0
 texture_normal = ExtResource( 3 )
 
 [node name="Cut_l" type="Label" parent="HBoxContainer/VBoxContainer/CenterContainer/Panel/VBoxContainer"]
-margin_top = 64.0
-margin_right = 16.0
-margin_bottom = 84.0
+margin_top = 68.0
+margin_right = 18.0
+margin_bottom = 88.0
 custom_fonts/font = ExtResource( 1 )
 text = "x"
 align = 1
 
 [node name="Connect" type="TextureButton" parent="HBoxContainer/VBoxContainer/CenterContainer/Panel/VBoxContainer"]
-margin_top = 88.0
-margin_right = 16.0
-margin_bottom = 104.0
+margin_top = 92.0
+margin_right = 18.0
+margin_bottom = 110.0
 texture_normal = ExtResource( 5 )
 
 [node name="Connect_l" type="Label" parent="HBoxContainer/VBoxContainer/CenterContainer/Panel/VBoxContainer"]
-margin_top = 108.0
-margin_right = 16.0
-margin_bottom = 128.0
+margin_top = 114.0
+margin_right = 18.0
+margin_bottom = 134.0
 custom_fonts/font = ExtResource( 1 )
 text = "c"
 align = 1
 
 [node name="Disconnect_l" type="TextureButton" parent="HBoxContainer/VBoxContainer/CenterContainer/Panel/VBoxContainer"]
-margin_top = 132.0
-margin_right = 16.0
-margin_bottom = 148.0
+margin_top = 138.0
+margin_right = 18.0
+margin_bottom = 156.0
 texture_normal = ExtResource( 4 )
 
 [node name="Disconnect_l2" type="Label" parent="HBoxContainer/VBoxContainer/CenterContainer/Panel/VBoxContainer"]
-margin_top = 152.0
-margin_right = 16.0
-margin_bottom = 172.0
+margin_top = 160.0
+margin_right = 18.0
+margin_bottom = 180.0
 custom_fonts/font = ExtResource( 1 )
 text = "v"
 align = 1
 
 [node name="CW" type="TextureButton" parent="HBoxContainer/VBoxContainer/CenterContainer/Panel/VBoxContainer"]
-margin_top = 176.0
-margin_right = 16.0
-margin_bottom = 192.0
+margin_top = 184.0
+margin_right = 18.0
+margin_bottom = 200.0
 texture_normal = ExtResource( 7 )
 
 [node name="CW_l" type="Label" parent="HBoxContainer/VBoxContainer/CenterContainer/Panel/VBoxContainer"]
-margin_top = 196.0
-margin_right = 16.0
-margin_bottom = 216.0
+margin_top = 204.0
+margin_right = 18.0
+margin_bottom = 224.0
 custom_fonts/font = ExtResource( 1 )
 text = "r"
 align = 1
@@ -143,15 +143,15 @@ __meta__ = {
 }
 
 [node name="CCW" type="TextureButton" parent="HBoxContainer/VBoxContainer/CenterContainer/Panel/VBoxContainer"]
-margin_top = 220.0
-margin_right = 16.0
-margin_bottom = 236.0
+margin_top = 228.0
+margin_right = 18.0
+margin_bottom = 244.0
 texture_normal = ExtResource( 6 )
 
 [node name="CCW_l" type="Label" parent="HBoxContainer/VBoxContainer/CenterContainer/Panel/VBoxContainer"]
-margin_top = 240.0
-margin_right = 16.0
-margin_bottom = 260.0
+margin_top = 248.0
+margin_right = 18.0
+margin_bottom = 268.0
 custom_fonts/font = ExtResource( 1 )
 text = "R"
 align = 1

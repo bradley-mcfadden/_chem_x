@@ -9,8 +9,13 @@ var belts:Array
 var structures:Array
 var pollers
 var world_size:Vector2
+
+onready var connect_request_line = null
 onready var connect_request_a = null
 onready var connect_request_b = null
+onready var disconnect_req_a  = null
+onready var disconnect_req_b  = null
+onready var line_mappings := {}
 
 func _ready():
 	for child in $SourceSinkGroup.get_children():
@@ -30,11 +35,12 @@ func add_struct(struct, x, y):
 	if structures[y][x]:
 		struct.queue_free()
 		return
-	# print('New structure at:', y, ' ', x)
 	structures[y][x] = struct
 	struct._start()
 	struct.connect("clicked", self, "_on_Struct_clicked")
 	struct.connect("connect_request", self, "_on_Connect_request")
+	struct.connect("cut_request", self, "_on_Cut_request")
+	struct.connect("disconnect_request", self, "_on_Disconnect_request")
 
 func add_poller(_poller, _x, _y):
 	print('New poller at:', _y, ' ', _x)
@@ -81,6 +87,9 @@ func add_belt(belt, x, y):
 	if belt.num_perp_sinks == 0:
 		belt.set_linear()
 
+func get_struct_at(vec:Vector2):
+	return structures[vec.y][vec.x]
+
 func neighbour_tiles(vec:Vector2) -> Array:
 	var y = vec.x
 	var x = vec.y
@@ -110,19 +119,74 @@ func _on_Connect_request(machine):
 		connect_request_a = machine
 		return
 	if not connect_request_b:
-		var line = $Line2D.duplicate()
-		line.clear_points()
-		# line.global_position = connect_request_a.global_position
-		line.add_point(connect_request_a.global_position)
 		connect_request_b = machine
+		var dist := abs(connect_request_a - connect_request_b)
+		var line = $Line2D.duplicate()
+		var line_id = (str(connect_request_a.get_instance_id()) 
+				+ str(connect_request_b.get_instance_id()))
+		line_mappings[line_id] = line
+		print(line_mappings)
+		line.clear_points()
+		line.add_point(connect_request_a.global_position)
 		line.add_point(connect_request_b.global_position)
-		print(line.get_point_count())
 		$Connections.add_child(line)
 		line.visible = true
 		connect_request_a.connect_to_machine(connect_request_b)
 		clear_connect_requests()
 		emit_signal("sound_requested", "drill")
 
+func _on_Disconnect_request(machine:Object):
+	if not disconnect_req_a:
+		disconnect_req_a = machine
+		return
+	if not disconnect_req_b:
+		disconnect_req_b = machine
+		var line_ids = [str(disconnect_req_a.get_instance_id()), 
+				str(disconnect_req_b.get_instance_id())]
+		var line_id_a = line_ids[0] + line_ids[1]
+		var line_id_b = line_ids[1] + line_ids[0]
+		if line_id_a in line_mappings:
+			disconnect_req_a.disconnect("output_ready", disconnect_req_b, "check_input")
+			disconnect_req_b.disconnect("input_response", disconnect_req_a, "check_output_response")
+			disconnect_req_a.disconnect("pass_item", disconnect_req_b, "push_to_inventory")
+			$Connections.remove_child(line_mappings[line_id_a])
+			line_mappings[line_id_a].queue_free()
+			line_mappings.erase(line_id_a)
+		elif line_id_b in line_mappings:
+			disconnect_req_a.disconnect("output_ready", disconnect_req_b, "check_input")
+			disconnect_req_b.disconnect("input_response", disconnect_req_a, "check_output_response")
+			disconnect_req_a.disconnect("pass_item", disconnect_req_b, "push_to_inventory")
+			$Connections.remove_child(line_mappings[line_id_b])
+			line_mappings[line_id_b].queue_free()
+			line_mappings.erase(line_id_b)
+		clear_connect_requests()
+
+func _on_Cut_request(machine:Object):
+	# find connections of machine
+	var cxns = machine.get_incoming_connections()
+	# remove any incoming connections
+	for cx in cxns:
+		# machine.disconnect(cx['signal_name'], cx['source'], cx['method_name'])
+		cx['source'].disconnect(cx['signal_name'], machine, cx['method_name'])
+	# queue free machine
+	for i in range(len(structures)):
+		for j in range(len(structures[i])):
+			if machine == structures[i][j]:
+				if belts[i][j]:
+					belts[i][j] = null
+					# update neighbours
+					var sink = pointing_at(Vector2(i, j), machine.facing)
+					belts[sink.x][sink.y].reset()
+					for b in neighbour_tiles(sink):
+						if belts[b.x][b.y] and pointing_at(b, belts[b.x][b.y].facing) == sink:
+							belts[sink.x][sink.y].new_source(belts[b.x][b.y].facing)
+					belts[i][j] = null
+				structures[i][j] == null
+				machine.queue_free()
+				break
+
 func clear_connect_requests():
 	connect_request_a = null 
 	connect_request_b = null
+	disconnect_req_a  = null
+	disconnect_req_b  = null

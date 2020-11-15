@@ -6,6 +6,8 @@ signal input_response(accept)
 
 signal clicked(machine, menu)
 signal connect_request(machine)
+signal disconnect_request(machine)
+signal cut_request(machine)
 
 # Slots
 # check_input(item)
@@ -84,8 +86,13 @@ func place():
 	$Button.visible = true
 
 func _on_Button_pressed():
+	print(self, ' ' , Global.CM_TO_STR[Global.click_state])
 	match Global.click_state:
 		Global.CLICK_MODE.NORMAL:
 			emit_signal("clicked", self, 'RECIPE')
 		Global.CLICK_MODE.CONNECT:
 			emit_signal("connect_request", self)
+		Global.CLICK_MODE.DISCONNECT:
+			emit_signal("disconnect_request", self)
+		Global.CLICK_MODE.CUT:
+			emit_signal("cut_request", self)

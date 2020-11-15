@@ -8,6 +8,7 @@ signal pass_item(item)
 
 signal clicked(machine, request)
 signal connect_request(machine)
+signal disconnect_request(machine)
 
 # Slots
 # check_input(item)
@@ -67,3 +68,5 @@ func _on_Button_pressed():
 			emit_signal("clicked", self, 'ITEM')
 		Global.CLICK_MODE.CONNECT:
 			emit_signal("connect_request", self)
+		Global.CLICK_MODE.DISCONNECT:
+			emit_signal("disconnect_request", self)
