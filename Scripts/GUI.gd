@@ -1,6 +1,7 @@
 extends MarginContainer
 
 signal item_selected(index)
+signal build_requested()
 
 export var columns:int = 9
 
@@ -38,7 +39,9 @@ func add_items(items):
 		current_row.add_child(button)
 		item_count += 1
 
-func _on_hotbar_clicked(b): 
+func _on_hotbar_clicked(b):
+	emit_signal("build_requested")
 	for i in range(len(buttons)):
 		if buttons[i] == b:
 			emit_signal("item_selected", i)
+		

@@ -10,7 +10,7 @@ var structures:Array
 var pollers
 var world_size:Vector2
 
-onready var connect_request_line = null
+onready var connect_request_line := $Line2D
 onready var connect_request_a = null
 onready var connect_request_b = null
 onready var disconnect_req_a  = null
@@ -117,20 +117,26 @@ func _on_Struct_clicked(struct, request):
 func _on_Connect_request(machine):
 	if not connect_request_a:
 		connect_request_a = machine
+		connect_request_line.visible = true
+		connect_request_line.add_point(connect_request_a.global_position)
+		connect_request_line.add_point(connect_request_a.global_position)
 		return
 	if not connect_request_b:
+		if not connect_request_line.visible:
+			return
 		connect_request_b = machine
-		var dist := abs(connect_request_a - connect_request_b)
-		var line = $Line2D.duplicate()
+		var line:Line2D = Line2D.new()
 		var line_id = (str(connect_request_a.get_instance_id()) 
 				+ str(connect_request_b.get_instance_id()))
-		line_mappings[line_id] = line
-		print(line_mappings)
-		line.clear_points()
 		line.add_point(connect_request_a.global_position)
 		line.add_point(connect_request_b.global_position)
-		$Connections.add_child(line)
+		line.default_color = Color(1.0, 0.67, 0, 1)
+		line.width = 10
 		line.visible = true
+		line.begin_cap_mode = Line2D.LINE_CAP_ROUND
+		line.end_cap_mode = Line2D.LINE_CAP_ROUND
+		$Connections.add_child(line)
+		line_mappings[line_id] = line
 		connect_request_a.connect_to_machine(connect_request_b)
 		clear_connect_requests()
 		emit_signal("sound_requested", "drill")
@@ -176,12 +182,13 @@ func _on_Cut_request(machine:Object):
 					belts[i][j] = null
 					# update neighbours
 					var sink = pointing_at(Vector2(i, j), machine.facing)
-					belts[sink.x][sink.y].reset()
-					for b in neighbour_tiles(sink):
-						if belts[b.x][b.y] and pointing_at(b, belts[b.x][b.y].facing) == sink:
-							belts[sink.x][sink.y].new_source(belts[b.x][b.y].facing)
+					if belts[sink.x][sink.y]:
+						belts[sink.x][sink.y].reset()
+						for b in neighbour_tiles(sink):
+							if belts[b.x][b.y] and pointing_at(b, belts[b.x][b.y].facing) == sink:
+								belts[sink.x][sink.y].new_source(belts[b.x][b.y].facing)
 					belts[i][j] = null
-				structures[i][j] == null
+				structures[i][j] = null
 				machine.queue_free()
 				break
 
@@ -190,3 +197,5 @@ func clear_connect_requests():
 	connect_request_b = null
 	disconnect_req_a  = null
 	disconnect_req_b  = null
+	connect_request_line.clear_points()
+	# connect_request_line.visible = false

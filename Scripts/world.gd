@@ -79,10 +79,7 @@ func _input(_event):
 		if current_ghost and current_ghost.has_method("rotate90"):
 			current_ghost.rotate90()	
 	if Input.is_action_just_pressed("normal_mode"):
-		clear_current()
-		Global.click_state = Global.CLICK_MODE.NORMAL
-		Input.set_custom_mouse_cursor(hammer_c)
-		$BackgroundTiles/Structures/Connections.visible = false
+		set_normal_state()
 	elif Input.is_action_just_pressed("connect_mode"):
 		clear_current()
 		Global.click_state = Global.CLICK_MODE.CONNECT
@@ -92,11 +89,13 @@ func _input(_event):
 		structures_node.clear_connect_requests()
 	elif Input.is_action_just_pressed("disconnect_mode"):
 		clear_current()
+		structures_node.clear_connect_requests()
 		Global.click_state = Global.CLICK_MODE.DISCONNECT
 		Input.set_custom_mouse_cursor(link_min_c)
 		$BackgroundTiles/Structures/Connections.visible = true
 	elif Input.is_action_just_pressed("cut_mode"):
 		clear_current()
+		structures_node.clear_connect_requests()
 		Global.click_state = Global.CLICK_MODE.CUT
 		Input.set_custom_mouse_cursor(scissors_c)
 		$BackgroundTiles/Structures/Connections.visible = false
@@ -129,3 +128,13 @@ func _on_ScoringTimer_timeout():
 	global_avg = global_sum / len(sinks)
 	if global_avg >= production_goal:
 		emit_signal("level_finished")
+
+func _on_BuildRequested():
+	set_normal_state()
+
+func set_normal_state():
+	clear_current()
+	structures_node.clear_connect_requests()
+	Global.click_state = Global.CLICK_MODE.NORMAL
+	Input.set_custom_mouse_cursor(hammer_c)
+	$BackgroundTiles/Structures/Connections.visible = false
