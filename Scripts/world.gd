@@ -14,8 +14,7 @@ var link_add_c = load("res://Icons/LinkAdd.png")
 var link_min_c = load("res://Icons/LinkMin.png")
 
 export var world_rect:Vector2 = Vector2(30, 20)
-export var production_goal := 100.0 # in units per min
-export var production_item := ''
+export(Array, Dictionary) var p_goals = []
 
 onready var player := $Player
 onready var background := $BackgroundTiles
@@ -32,8 +31,9 @@ func _ready():
 	for child in $BackgroundTiles/Structures/SourceSinkGroup.get_children():
 		if child.has_method("get_count"):
 			sinks.append(child)
-			if not production_item == '':
-				child.set_current_item(production_item)
+			# if not production_item == '':
+			# 	child.set_current_item(production_item)
+	$CanvasLayer/Production.set_goals(p_goals)
 	Input.set_custom_mouse_cursor(hammer_c)
 
 func _unhandled_input(_event):
@@ -105,6 +105,18 @@ func _instance_item(index):
 	current_placeable = index
 	current_ghost = structures[index]["resource"].instance()
 	self.add_child(current_ghost)
+	var mouse_pos = get_global_mouse_position()
+	var mouse_pos_rounded = Vector2(int(mouse_pos.x), int(mouse_pos.y))
+	# the following code rounds the map coordinates up if the remainder 
+	# is greater than 15.
+	# this makes building more accurate.
+	var q = background.world_to_map(mouse_pos_rounded)
+	var r = Vector2(int(mouse_pos_rounded.x) % 32, int(mouse_pos_rounded.y) % 32)
+	if r.x > 15:
+		q.x += 1
+	if r.y > 15:
+		q.y += 1
+	current_ghost.global_position = background.map_to_world(q)
 
 func clear_current():
 	if current_ghost:
@@ -126,8 +138,8 @@ func _on_ScoringTimer_timeout():
 		temp += sink.get_count()
 	global_sum = temp
 	global_avg = global_sum / len(sinks)
-	if global_avg >= production_goal:
-		emit_signal("level_finished")
+	# if global_avg >= production_goal:
+	#	emit_signal("level_finished")
 
 func _on_BuildRequested():
 	set_normal_state()

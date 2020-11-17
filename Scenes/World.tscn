@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scripts/Structures.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/world.gd" type="Script" id=2]
@@ -14,10 +14,15 @@
 [ext_resource path="res://Scenes/Toolbar.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Hotbar.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/Line2D.gd" type="Script" id=14]
+[ext_resource path="res://Scenes/Production.tscn" type="PackedScene" id=15]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 2 )
 world_rect = Vector2( 31, 21 )
+p_goals = [ {
+"item_id": "74rWEmTdVh0f2WhC",
+"rate": 0.5
+} ]
 
 [node name="BackgroundTiles" type="TileMap" parent="."]
 position = Vector2( 16, 16 )
@@ -73,6 +78,8 @@ visible = false
 
 [node name="Hotbar" parent="CanvasLayer" instance=ExtResource( 13 )]
 
+[node name="Production" parent="CanvasLayer" instance=ExtResource( 15 )]
+
 [node name="Sounds" type="Node" parent="."]
 
 [node name="PlaceBlock" type="AudioStreamPlayer2D" parent="Sounds"]
@@ -84,6 +91,7 @@ stream = ExtResource( 9 )
 volume_db = 2.0
 
 [node name="ScoringTimer" type="Timer" parent="."]
+wait_time = 5.0
 autostart = true
 [connection signal="machine_clicked" from="." to="CanvasLayer" method="_on_World_machine_clicked"]
 [connection signal="clicked" from="BackgroundTiles/Structures" to="." method="_on_Structures_clicked"]
