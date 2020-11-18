@@ -15,7 +15,7 @@ onready var rate_label := $Panel/MarginContainer/VBoxContainer2/HBoxContainer/VB
 
 func _ready():
 	tx_rect.texture = icon
-	curr_label.text = '0.0/s'
+	curr_label.text = '0.00/s'
 	rate_label.text = '/' + str(rate)
 
 func set_icon(icon):
@@ -25,4 +25,4 @@ func set_rate(rate):
 	rate_label.text = '/' + str(rate)
 
 func set_current_rate(_curr_rate):
-	curr_label.text = str(round(_curr_rate * 10) / 10) + '/s'
+	curr_label.text = '%.2f/s' % _curr_rate

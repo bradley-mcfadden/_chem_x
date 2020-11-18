@@ -11,13 +11,16 @@ onready var menu_idx_mapping := {}
 onready var current_machine = null
 
 func _ready():
-	item_list.add_item('Item List', null, false)
+	item_list.add_item('Items', null, false)
 	#item_list.
 	var i := 1
 	for item in Global.get_item_table():
 		# var txt = ImageTexture.new()
 		# txt.load(item['icon'])
-		item_list.add_item(item['name'], load(item['icon']), i)
+		var wds = ''
+		for word in item['name'].split('_'):
+			wds += (word[0].to_upper() + word.substr(1)) + ' ' 
+		item_list.add_item(' ' + wds, load(item['icon']), i)
 		menu_idx_mapping[i] = item
 		i += 1
 
@@ -28,6 +31,7 @@ func _on_ItemList_item_selected(index):
 
 func _on_Close_pressed():
 	self.visible = false
+	item_list.unselect_all()
 	disconnect_from_machine()
 
 func _on_OK_pressed():
@@ -36,6 +40,7 @@ func _on_OK_pressed():
 	var index = item_list.get_selected_items()[0]
 	visible = false
 	emit_signal("item_selected", menu_idx_mapping[index])
+	item_list.unselect_all()
 	disconnect_from_machine()
 
 func disconnect_from_machine():

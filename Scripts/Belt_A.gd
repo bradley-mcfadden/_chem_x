@@ -8,6 +8,8 @@ onready var num_perp_sinks:int = 0
 onready var e_inventory = Queue.new(capacity)
 onready var hitbox_lock = false
 
+export var belt_speed := 0.8
+
 # func _ready():
 # 	$Button.disabled = true
 
@@ -102,11 +104,7 @@ func set_right_corner():
 	$MID_L/CollisionPolygon2D.visible = false
 	$MID_R/CollisionPolygon2D.visible = true
 	$END/CollisionPolygon2D.disabled = false
-#	$END_L/CollisionPolygon2D.disabled = true
-#	$END_R/CollisionPolygon2D.disabled = false
 	$END/CollisionPolygon2D.visible = true
-#	$END_L/CollisionPolygon2D.visible = false
-#	$END_R/CollisionPolygon2D.visible = true
 	hitbox_lock = false
 
 func reset():
@@ -181,14 +179,16 @@ func check_input(item):
 
 # Perform a lerp on item after moving receiving it from other machine
 func push_to_inventory(item):
-	if not inventory.is_full():
-		return
-	# print(self, ' accepting ', item)
+	# this is a busy loop that waits until this belt's
+	# inventory is ready for the item, this preserves
+	# insertion order and deals with godot's iterative
+	# way of signal processing
+	while true:
+		if inventory.is_full():
+			break
+		yield(get_tree().create_timer(.01), "timeout")
 	var _item_scene = load(item['path']).instance()
 	get_parent().add_child(_item_scene)
-	# _item_scene.velocity = Vector2(10, 0)
-	# _item_scene.move_and_collide(Vector2(20,0))
-	# var rotation_offset := Vector2()
 	var start_position := Vector2()
 	match sprite.animation:
 		"linear":
@@ -199,17 +199,22 @@ func push_to_inventory(item):
 			start_position = $RIGHT_SIDE.global_position
 	var end_position = $TOP_SIDE.global_position
 	_item_scene.global_position = start_position
-	_item_scene.set_mc_target(self.global_position - start_position)
-	_item_scene.set_end_target(end_position - self.global_position)
+	_item_scene.set_mc_target((self.global_position - start_position)/belt_speed)
+	_item_scene.set_end_target((end_position - self.global_position)/belt_speed)
 	$MID.connect("area_entered", _item_scene, "stop")
 	$MID_L.connect("area_entered", _item_scene, "stop")
 	$MID_R.connect("area_entered", _item_scene, "stop")
 	$END.connect("area_entered", _item_scene, "stop")
-#	$END_L.connect("area_entered", _item_scene, "stop")
-#	$END_R.connect("area_entered", _item_scene, "stop")
 	_item_scene.enable_goal_collision()
 	inventory.push(item)
 	e_inventory.push(_item_scene)
 
 func left_handler(_a):
 	print('left hit')
+
+# called before deletion
+func _on_Belt_A_tree_exiting():
+	# delete any entities on belt when it's deleted
+	while e_inventory.is_empty():
+		var e = e_inventory.pop()
+		e.queue_free()

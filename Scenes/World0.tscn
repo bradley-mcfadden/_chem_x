@@ -12,7 +12,6 @@
 [ext_resource path="res://Scripts/world.gd" type="Script" id=10]
 [ext_resource path="res://Sounds/drill.wav" type="AudioStream" id=11]
 
-
 [node name="World0" type="Node2D"]
 script = ExtResource( 10 )
 world_rect = Vector2( 31, 21 )

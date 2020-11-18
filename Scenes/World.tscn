@@ -13,7 +13,7 @@
 [ext_resource path="res://Placeable Scenes/Source.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Toolbar.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Hotbar.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/Line2D.gd" type="Script" id=14]
+[ext_resource path="res://Scripts/Line2D.gd" type="Script" id=14]
 [ext_resource path="res://Scenes/Production.tscn" type="PackedScene" id=15]
 
 [node name="World" type="Node2D"]
@@ -56,6 +56,10 @@ starting_item_id = "74rWEmTdVh0f2WhC"
 [node name="Source" parent="BackgroundTiles/Structures/SourceSinkGroup" instance=ExtResource( 11 )]
 position = Vector2( 96, 32 )
 starting_item_id = "N9VKLuJZQgZyMw3P"
+
+[node name="Source2" parent="BackgroundTiles/Structures/SourceSinkGroup" instance=ExtResource( 11 )]
+position = Vector2( 160, 32 )
+starting_item_id = "f8NZ7lCZb9sBbmtJ"
 
 [node name="Entities" type="Node" parent="BackgroundTiles"]
 

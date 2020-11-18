@@ -18,6 +18,9 @@ func _ready():
 		add_constant_override("separation", spacing)
 	# $Button.connect("pressed", self, "_on_Button_pressed")
 
+func set_selected(selected:bool):
+	$Button.pressed = selected
+
 func is_selected():
 	return button_state
 
@@ -35,7 +38,6 @@ func set_text(text):
 
 func _on_Button_pressed():
 	emit_signal("expanded")
-
 
 func _on_Button_toggled(button_pressed):
 	button_state = button_pressed

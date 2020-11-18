@@ -15,3 +15,7 @@ func set_goals(goals):
 		gp.set_rate(goal['rate'])
 		gp.set_icon(load(item['icon']))
 		gp.rect_min_size.x = $HBoxContainer/VBoxContainer/PanelContainer.rect_min_size.x
+
+func update_production(item_id, new_value):
+	print('update_production ', item_id, ' ', new_value)
+	goal_dict['item_id'].set_current_rate(new_value)

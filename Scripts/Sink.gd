@@ -6,6 +6,7 @@ signal input_response(accept)
 signal clicked(machine, request)
 signal connect_request(machine)
 signal disconnect_request(machine)
+signal cut_request(machine)
 
 # Slots
 # check_input(item)
@@ -21,7 +22,7 @@ var current_item:Dictionary
 
 export var input_dir:int = Constants.Direction.NORTH
 export var output_dir:int = -1
-export var process_time:int = 1
+export var process_time:float = 1
 export var starting_item_id := ''
 
 func _ready():
@@ -45,6 +46,7 @@ func set_current_item(item):
 func place():
 	placed = true
 	$Button.visible = true
+	$Button.disabled = false
 
 func push_to_inventory(_item):
 	yield(get_tree().create_timer(process_time),"timeout")
@@ -63,6 +65,9 @@ func check_input(item):
 func get_count():
 	return count
 
+func get_current_item_id():
+	return current_item['id']
+
 func connect_to_machine(machine):
 	print("connected ", self, " to ", machine)
 	# warning-ignore:return_value_discarded
@@ -72,6 +77,7 @@ func connect_to_machine(machine):
 	connect("pass_item", machine, "push_to_inventory")
 
 func _on_Button_pressed():
+	print('yes')
 	match Global.click_state:
 		Global.CLICK_MODE.NORMAL:
 			emit_signal("clicked", self, 'ITEM')

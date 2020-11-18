@@ -17,6 +17,7 @@ animations = [ {
 
 [node name="Sink" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+process_time = 0.01
 
 [node name="Sprite" parent="." index="0"]
 texture = SubResource( 1 )

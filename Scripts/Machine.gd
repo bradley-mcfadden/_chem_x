@@ -27,6 +27,7 @@ export var capacity:int = 10
 func _ready():
 	timer = $Timer
 	timer.wait_time = process_time
+	# timer.wait_time = rand_range(0.1, 1)
 	inventory = Queue.new(capacity)
 	for i in items:
 		inventory.push(i)

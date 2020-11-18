@@ -9,6 +9,7 @@ signal pass_item(item)
 signal clicked(machine, request)
 signal connect_request(machine)
 signal disconnect_request(machine)
+signal cut_request(machine)
 
 # Slots
 # check_input(item)
@@ -21,7 +22,7 @@ onready var placed := false
 var current_item:Dictionary
 
 export var output_dir:int = Constants.Direction.SOUTH
-export var process_time:int = 1
+export var process_time:float = 1.5
 export var starting_item_id := ''
 
 func _ready():
@@ -44,7 +45,7 @@ func set_current_item(item):
 func place():
 	placed = true
 	$Button.visible = true
-
+	$Button.disabled = false
 
 func check_output():
 	if not current_item:# or not inventory.is_empty():
@@ -53,6 +54,7 @@ func check_output():
 
 func check_output_response(accept:bool):
 	if accept:
+		print(self, " positive output response")
 		emit_signal("pass_item", current_item)
 
 func connect_to_machine(machine):

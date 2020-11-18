@@ -22,6 +22,8 @@ onready var structures_node := $BackgroundTiles/Structures
 onready var sinks := []
 onready var global_sum := 0
 onready var global_avg := 0.0
+onready var goal_counts := {}
+onready var elapsed_time := 0
 
 func _ready():
 	structures = placeable_tiles.instance().get_loaded_children()
@@ -133,13 +135,21 @@ func _on_Structures_sound_requested(sound_name):
 			$Sounds/Drill.play()
 
 func _on_ScoringTimer_timeout():
-	var temp = 0
+	elapsed_time += $ScoringTimer.wait_time
 	for sink in sinks:
-		temp += sink.get_count()
-	global_sum = temp
-	global_avg = global_sum / len(sinks)
-	# if global_avg >= production_goal:
-	#	emit_signal("level_finished")
+		var key = sink.get_current_item_id()
+		if not key in goal_counts:
+			goal_counts[key] = 0
+		goal_counts[key] += sink.get_count()
+		print('key ', key, ' c_count ', sink.get_count(), ' t_count ', goal_counts[key], ' total_time ', elapsed_time)
+		# get elapsed time
+		# update production to use current count / elapsed time
+		$CanvasLayer/Production.update_production(key, goal_counts[key] / elapsed_time / (elapsed_time / $ScoringTimer.wait_time))
+		for goal in p_goals:
+			if key == goal['item_id'] and not (goal_counts[key] / elapsed_time
+			>= goal['rate']):
+				return
+	emit_signal("level_finished")
 
 func _on_BuildRequested():
 	set_normal_state()

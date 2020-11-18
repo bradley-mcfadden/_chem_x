@@ -40,6 +40,7 @@ func _on_ItemList_item_selected(index):
 func _on_Close_pressed():
 	self.visible = false
 	disconnect_from_machine()
+	$VBoxContainer/AccordionScrollArea.unselect_all()
 
 # Set recipe on machine, close menu, disconnect machine
 func _on_OK_pressed():
@@ -49,6 +50,7 @@ func _on_OK_pressed():
 	self.visible = false
 	emit_signal("recipe_selected", menu_idx_mapping[idx])
 	disconnect_from_machine()
+	$VBoxContainer/AccordionScrollArea.unselect_all()
 
 func disconnect_from_machine():
 	if current_machine.has_method("set_current_recipe"):

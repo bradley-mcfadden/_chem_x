@@ -19,7 +19,9 @@ onready var line_mappings := {}
 
 func _ready():
 	for child in $SourceSinkGroup.get_children():
+		child.place()
 		child.connect("connect_request", self, "_on_Connect_request")
+		child.connect("disconnect_request", self, "_on_Disconnect_request")
 
 func setup_world_size(rect:Vector2):
 	world_size = rect
@@ -174,6 +176,13 @@ func _on_Cut_request(machine:Object):
 	for cx in cxns:
 		# machine.disconnect(cx['signal_name'], cx['source'], cx['method_name'])
 		cx['source'].disconnect(cx['signal_name'], machine, cx['method_name'])
+	# destroy any visual connections this machine previously had
+	for l in line_mappings.keys():
+		if (l.substr(0, 4) == str(machine.get_instance_id()) 
+		or l.substr(4, 4) == str(machine.get_instance_id())):
+			$Connections.remove_child(line_mappings[l])
+			line_mappings[l].queue_free()
+			line_mappings.erase(l)
 	# queue free machine
 	for i in range(len(structures)):
 		for j in range(len(structures[i])):

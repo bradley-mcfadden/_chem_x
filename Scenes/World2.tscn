@@ -1,0 +1,106 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Assets/world_tiles.tres" type="TileSet" id=1]
+[ext_resource path="res://Placeable Scenes/Sink.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Placeable Scenes/Source.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scripts/CanvasLayer.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/Structures.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/world.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/Line2D.gd" type="Script" id=7]
+[ext_resource path="res://Sounds/drill.wav" type="AudioStream" id=8]
+[ext_resource path="res://Sounds/place_block.wav" type="AudioStream" id=9]
+[ext_resource path="res://Scenes/Hotbar.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Toolbar.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/ItemMenu.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Production.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/RecipeAccordionMenu.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=15]
+
+
+[node name="World2" type="Node2D"]
+script = ExtResource( 6 )
+world_rect = Vector2( 31, 21 )
+p_goals = [ {
+"item_id": "74rWEmTdVh0f2WhC",
+"rate": 0.5
+} ]
+
+[node name="BackgroundTiles" type="TileMap" parent="."]
+position = Vector2( 16, 16 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 0, 20, 0, 1, 20, 0, 2, 20, 0, 8, 20, 0, 9, 20, 0, 10, 20, 0, 65536, 20, 0, 65537, 20, 0, 65538, 20, 0, 65539, 20, 0, 65540, 20, 0, 65541, 20, 0, 65542, 20, 0, 65543, 20, 0, 65544, 20, 0, 65545, 20, 0, 65546, 20, 0, 131072, 20, 0, 131073, 20, 0, 131074, 20, 0, 131077, 20, 0, 131080, 20, 0, 131081, 20, 0, 131082, 20, 0, 196613, 20, 0, 262149, 20, 0, 327684, 20, 0, 327685, 20, 0, 327686, 20, 0, 393220, 20, 0, 393221, 20, 0, 393222, 20, 0, 458756, 20, 0, 458757, 20, 0, 458758, 20, 0 )
+
+[node name="Structures" type="Node" parent="BackgroundTiles"]
+script = ExtResource( 5 )
+
+[node name="Connections" type="Node2D" parent="BackgroundTiles/Structures"]
+z_index = 200
+
+[node name="Line2D" type="Line2D" parent="BackgroundTiles/Structures"]
+z_index = 1000
+z_as_relative = false
+points = PoolVector2Array( 336, -16 )
+default_color = Color( 1, 0.678431, 0, 1 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource( 7 )
+
+[node name="SourceSinkGroup" type="Node" parent="BackgroundTiles/Structures"]
+
+[node name="Sink" parent="BackgroundTiles/Structures/SourceSinkGroup" instance=ExtResource( 2 )]
+position = Vector2( 192, 258 )
+starting_item_id = "74rWEmTdVh0f2WhC"
+
+[node name="Source" parent="BackgroundTiles/Structures/SourceSinkGroup" instance=ExtResource( 3 )]
+position = Vector2( 96, 96 )
+starting_item_id = "N9VKLuJZQgZyMw3P"
+
+[node name="Source2" parent="BackgroundTiles/Structures/SourceSinkGroup" instance=ExtResource( 3 )]
+position = Vector2( 326, 32 )
+starting_item_id = "f8NZ7lCZb9sBbmtJ"
+
+[node name="Entities" type="Node" parent="BackgroundTiles"]
+
+[node name="Player" parent="." instance=ExtResource( 15 )]
+position = Vector2( 192, 64 )
+z_index = 10
+collision_layer = 1
+collision_mask = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource( 4 )
+
+[node name="ItemMenu" parent="CanvasLayer" instance=ExtResource( 12 )]
+visible = false
+
+[node name="RecipeAccordionMenu" parent="CanvasLayer" instance=ExtResource( 14 )]
+visible = false
+
+[node name="Toolbar" parent="CanvasLayer" instance=ExtResource( 11 )]
+
+[node name="Hotbar" parent="CanvasLayer" instance=ExtResource( 10 )]
+
+[node name="Production" parent="CanvasLayer" instance=ExtResource( 13 )]
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="PlaceBlock" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource( 9 )
+volume_db = -40.742
+
+[node name="Drill" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource( 8 )
+volume_db = 2.0
+
+[node name="ScoringTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+[connection signal="machine_clicked" from="." to="CanvasLayer" method="_on_World_machine_clicked"]
+[connection signal="clicked" from="BackgroundTiles/Structures" to="." method="_on_Structures_clicked"]
+[connection signal="sound_requested" from="BackgroundTiles/Structures" to="." method="_on_Structures_sound_requested"]
+[connection signal="build_requested" from="CanvasLayer/Hotbar" to="." method="_on_BuildRequested"]
+[connection signal="item_selected" from="CanvasLayer/Hotbar" to="." method="_instance_item"]
+[connection signal="timeout" from="ScoringTimer" to="." method="_on_ScoringTimer_timeout"]

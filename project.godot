@@ -224,5 +224,6 @@ file_logging/enable_file_logging=true
 [rendering]
 
 quality/2d/use_pixel_snap=true
+threads/thread_model=2
 environment/default_clear_color=Color( 0.054902, 0.0509804, 0.0509804, 1 )
 environment/default_environment="res://default_env.tres"

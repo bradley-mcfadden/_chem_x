@@ -16,6 +16,10 @@ func add_new_menu(text, icon):
 	# print($VBoxContainer.get_child_count())
 	return item
 
+func unselect_all():
+	for child in $VBoxContainer.get_children():
+		child.set_selected(false)
+
 func get_selected():
 	var i = 0
 	for child in $VBoxContainer.get_children():
