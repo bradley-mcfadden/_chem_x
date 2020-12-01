@@ -54,7 +54,7 @@ func check_output():
 
 func check_output_response(accept:bool):
 	if accept:
-		print(self, " positive output response")
+		# print(self, " positive output response")
 		emit_signal("pass_item", current_item)
 
 func connect_to_machine(machine):

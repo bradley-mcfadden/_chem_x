@@ -25,10 +25,16 @@ func _on_ghost_entered(_body):
 	collision_count += 1
 	if collision_count == 1:
 		sprite.material = red_material
-		is_placeable = false
+		set_placeable(false)
 
 func _on_ghost_exited(_body):
 	collision_count -= 1
 	if collision_count == 0:
+		set_placeable(true)
+
+func set_placeable(placeable):
+	if placeable:
 		sprite.material = green_material
-		is_placeable = true
+	else:
+		sprite.material = red_material
+	is_placeable = placeable

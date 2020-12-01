@@ -24,13 +24,20 @@ onready var global_sum := 0
 onready var global_avg := 0.0
 onready var goal_counts := {}
 onready var elapsed_time := 0
+onready var inter_size := 5
+onready var inter_counter := 0
+onready var inter_container := []
 
 func _ready():
+	for i in range(inter_size):
+		inter_container.append(0)
 	structures = placeable_tiles.instance().get_loaded_children()
 	$CanvasLayer/Hotbar.add_items(structures)
 	structures_node.setup_world_size(world_rect)
 	Global.load_items()
 	for child in $BackgroundTiles/Structures/SourceSinkGroup.get_children():
+		print(child)
+		print(sinks)
 		if child.has_method("get_count"):
 			sinks.append(child)
 			# if not production_item == '':
@@ -74,6 +81,13 @@ func _input(_event):
 		if r.y > 15:
 			q.y += 1
 		current_ghost.global_position = background.map_to_world(q)
+		# if dist(mouse_pos, player.global_position) >= 10 tiles
+		if mouse_pos.distance_to(player.global_position) >= 32 * 10:
+			if current_ghost.is_placeable:
+				current_ghost.set_placeable(false)
+			else:
+				pass
+			current_ghost.set_placeable(false)
 	if Input.is_action_just_pressed("rotate_ccw"):
 		if current_ghost and current_ghost.has_method("rotateN90"):
 			current_ghost.rotateN90()
@@ -136,20 +150,40 @@ func _on_Structures_sound_requested(sound_name):
 
 func _on_ScoringTimer_timeout():
 	elapsed_time += $ScoringTimer.wait_time
+	var win_flag := true
+	var prev_counts := goal_counts.duplicate(true)
+	for key in goal_counts.keys():
+		goal_counts[key] = 0
 	for sink in sinks:
 		var key = sink.get_current_item_id()
 		if not key in goal_counts:
 			goal_counts[key] = 0
+			prev_counts[key] = 0
+		# goal_counts[key] = 0
 		goal_counts[key] += sink.get_count()
-		print('key ', key, ' c_count ', sink.get_count(), ' t_count ', goal_counts[key], ' total_time ', elapsed_time)
-		# get elapsed time
-		# update production to use current count / elapsed time
-		$CanvasLayer/Production.update_production(key, goal_counts[key] / elapsed_time / (elapsed_time / $ScoringTimer.wait_time))
+	for key in goal_counts.keys():
+		var prev_count = prev_counts[key]
+		var curr_count = goal_counts[key]
+		var inter = float(curr_count - prev_count) / $ScoringTimer.wait_time
+			# get elapsed time
+			# update production to use current count / elapsed time
+		print('Inter ', inter)
+		if inter_counter < inter_size:
+			inter_container[inter_counter] = inter
+			inter_counter += 1
+		else:
+			inter_counter = 0
+		var inter_sum := 0.0
+		for i in inter_container:
+			inter_sum += i
+		print('Inter sum ', inter_sum, ' Interc ', inter_container, ' Inter size ', inter_size)
+		$CanvasLayer/Production.update_production(key, float(inter_sum) / inter_size) # / (elapsed_time / $ScoringTimer.wait_time))
 		for goal in p_goals:
 			if key == goal['item_id'] and not (goal_counts[key] / elapsed_time
-			>= goal['rate']):
-				return
-	emit_signal("level_finished")
+				>= goal['rate']):
+				win_flag = false
+	if win_flag:
+		emit_signal("level_finished")
 
 func _on_BuildRequested():
 	set_normal_state()

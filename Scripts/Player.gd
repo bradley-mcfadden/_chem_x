@@ -32,10 +32,12 @@ func _input(_event):
 		change = true
 	if change == true:
 		self.rotation = direction.angle()
-	if Input.is_action_pressed("zoom_in"):
+	if Input.is_action_pressed("zoom_in") and camera.zoom.x <= 1 and camera.zoom.y <= 1:
 		camera.zoom += Vector2(1.0/25, 1.0/25)
-	if Input.is_action_pressed("zoom_out"):
+		print(camera.zoom)
+	if Input.is_action_pressed("zoom_out")  and camera.zoom.x >= 0.3 and camera.zoom.y >= 0.3:
 		camera.zoom -= Vector2(1.0/25, 1.0/25)
+		print(camera.zoom)
 	direction = direction.normalized()
 
 func _physics_process(_delta):

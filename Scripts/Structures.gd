@@ -83,6 +83,8 @@ func add_belt(belt, x, y):
 			belt.new_source(n.get_facing())
 	var sink = pointing_at(Vector2(y, x), belt.facing)
 	# print('facing ', sink)
+	if Input.is_action_pressed("shift"):
+		return
 	if belts[sink.x][sink.y]:
 		# print('there is a sink')
 		belts[sink.x][sink.y].new_source(belt.facing)

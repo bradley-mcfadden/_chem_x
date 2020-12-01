@@ -1,6 +1,6 @@
 extends MarginContainer
 
-onready var goal_panel = preload("res://GoalPanel.tscn")
+onready var goal_panel = preload("res://Scenes/GoalPanel.tscn")
 onready var goal_dict := {}
 
 func set_goals(goals):
