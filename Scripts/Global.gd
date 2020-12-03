@@ -3,7 +3,7 @@ extends Node
 enum MODE {EDIT, PAUSE, PLAY}
 enum CLICK_MODE {CONNECT, NORMAL, DISCONNECT, CUT}
 
-const LEVELS = ['res://Levels/1_intro_crafting.tscn']
+const LEVELS = ['res://Levels/1_intro_belts.tscn', 'res://Levels/2_intro_crafting.tscn']
 onready var play_state:int = MODE.PLAY
 onready var click_state:int = CLICK_MODE.NORMAL
 onready var item_table:Array

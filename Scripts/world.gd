@@ -68,6 +68,8 @@ func _unhandled_input(_event):
 				# 	pass
 
 func _input(_event):
+	if Input.is_action_just_pressed("next_level"):
+		emit_signal("level_finished")
 	if current_ghost:
 		var mouse_pos = get_global_mouse_position()
 		var mouse_pos_rounded = Vector2(int(mouse_pos.x), int(mouse_pos.y))
@@ -167,7 +169,7 @@ func _on_ScoringTimer_timeout():
 		var inter = float(curr_count - prev_count) / $ScoringTimer.wait_time
 			# get elapsed time
 			# update production to use current count / elapsed time
-		print('Inter ', inter)
+		# print('Inter ', inter)
 		if inter_counter < inter_size:
 			inter_container[inter_counter] = inter
 			inter_counter += 1
@@ -176,11 +178,11 @@ func _on_ScoringTimer_timeout():
 		var inter_sum := 0.0
 		for i in inter_container:
 			inter_sum += i
-		print('Inter sum ', inter_sum, ' Interc ', inter_container, ' Inter size ', inter_size)
-		$CanvasLayer/Production.update_production(key, float(inter_sum) / inter_size) # / (elapsed_time / $ScoringTimer.wait_time))
+		# print('Inter sum ', inter_sum, ' Interc ', inter_container, ' Inter size ', inter_size)
+		var current_production := float(inter_sum) / inter_size
+		$CanvasLayer/Production.update_production(key, current_production) # / (elapsed_time / $ScoringTimer.wait_time))
 		for goal in p_goals:
-			if key == goal['item_id'] and not (goal_counts[key] / elapsed_time
-				>= goal['rate']):
+			if key == goal['item_id'] and not (current_production >= goal['rate']):
 				win_flag = false
 	if win_flag:
 		emit_signal("level_finished")

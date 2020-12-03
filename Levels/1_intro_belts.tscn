@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scripts/CanvasLayer.gd" type="Script" id=1]
 [ext_resource path="res://Placeable Scenes/Sink.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/RecipeAccordionMenu.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Toolbar.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Newspaper.tscn" type="PackedScene" id=16]
 
 [node name="1_intro_belts" type="Node2D"]
 script = ExtResource( 5 )
@@ -87,6 +88,9 @@ visible = false
 [node name="Hotbar" parent="CanvasLayer" instance=ExtResource( 12 )]
 
 [node name="Production" parent="CanvasLayer" instance=ExtResource( 10 )]
+
+[node name="Newspaper" parent="CanvasLayer" instance=ExtResource( 16 )]
+mouse_filter = 2
 
 [node name="Sounds" type="Node" parent="."]
 

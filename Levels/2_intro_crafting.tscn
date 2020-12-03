@@ -16,7 +16,7 @@
 [ext_resource path="res://Scenes/RecipeAccordionMenu.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Toolbar.tscn" type="PackedScene" id=15]
 
-[node name="1_intro_crafting" type="Node2D"]
+[node name="2_intro_crafting" type="Node2D"]
 script = ExtResource( 5 )
 world_rect = Vector2( 31, 21 )
 p_goals = [ {
