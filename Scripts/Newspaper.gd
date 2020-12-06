@@ -1,7 +1,7 @@
 extends MarginContainer
 
-signal close_signal()
+signal closed()
 
 
 func _on_Button_pressed():
-	emit_signal("close_signal")
+	emit_signal("closed")

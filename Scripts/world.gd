@@ -2,6 +2,7 @@ extends Node2D
 
 signal machine_clicked(machine, request)
 signal level_finished()
+signal goal_complete()
 
 var current_placeable:int
 var current_ghost:Node2D
@@ -15,6 +16,7 @@ var link_min_c = load("res://Icons/LinkMin.png")
 
 export var world_rect:Vector2 = Vector2(30, 20)
 export(Array, Dictionary) var p_goals = []
+export var valid_buildings := [0, 3]
 
 onready var player := $Player
 onready var background := $BackgroundTiles
@@ -32,7 +34,11 @@ func _ready():
 	for i in range(inter_size):
 		inter_container.append(0)
 	structures = placeable_tiles.instance().get_loaded_children()
-	$CanvasLayer/Hotbar.add_items(structures)
+	var valid := []
+	for i in range(len(structures)):
+		if i in valid_buildings:
+			valid.append(structures[i])
+	$CanvasLayer/Hotbar.add_items(valid)
 	structures_node.setup_world_size(world_rect)
 	Global.load_items()
 	for child in $BackgroundTiles/Structures/SourceSinkGroup.get_children():
@@ -69,7 +75,7 @@ func _unhandled_input(_event):
 
 func _input(_event):
 	if Input.is_action_just_pressed("next_level"):
-		emit_signal("level_finished")
+		emit_signal("goal_complete")
 	if current_ghost:
 		var mouse_pos = get_global_mouse_position()
 		var mouse_pos_rounded = Vector2(int(mouse_pos.x), int(mouse_pos.y))
@@ -185,7 +191,7 @@ func _on_ScoringTimer_timeout():
 			if key == goal['item_id'] and not (current_production >= goal['rate']):
 				win_flag = false
 	if win_flag:
-		emit_signal("level_finished")
+		emit_signal("goal_complete")
 
 func _on_BuildRequested():
 	set_normal_state()
@@ -196,3 +202,9 @@ func set_normal_state():
 	Global.click_state = Global.CLICK_MODE.NORMAL
 	Input.set_custom_mouse_cursor(hammer_c)
 	$BackgroundTiles/Structures/Connections.visible = false
+
+func _on_goal_complete():
+	$CanvasLayer/Newspaper.show()
+
+func _on_Newspaper_closed():
+	emit_signal("level_finished")

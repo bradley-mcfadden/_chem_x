@@ -857,7 +857,7 @@ WindowDialog/icons/close = null
 WindowDialog/icons/close_highlight = null
 WindowDialog/styles/panel = null
 
-[sub_resource type="ShortCut" id=6]
+[sub_resource type="ShortCut" id=5]
 
 [node name="Hotbar" type="MarginContainer"]
 anchor_left = -0.00390625
@@ -901,5 +901,5 @@ anchor_bottom = 0.0
 margin_right = 764.0
 margin_bottom = 86.0
 theme = SubResource( 4 )
-shortcut = SubResource( 6 )
+shortcut = SubResource( 5 )
 stretch_mode = 3

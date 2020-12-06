@@ -61,33 +61,48 @@ func add_belt(belt, x, y):
 	if x < 0 or y < 0 or x >= world_size.x or y >= world_size.y:
 		belt.queue_free()
 		return
+	# This piece of code is for updating the surrounding belts if a current
+	# belt is replaced.
 	if belts[y][x]:
-		# print('replacing belt')
+		# Sink: The tile the belt points at
 		var sink = pointing_at(Vector2(y, x), belts[y][x].facing)
-		# print('Sink:', sink)
+		# b is a neighbour of the belt
 		for b in neighbour_tiles(Vector2(y, x)):
-			# print(b)
+			# If the belt was pointing at b
 			if belts[b.x][b.y] and b == sink:
-				# print('b is sink')
+				# Update b visually
 				for a in neighbour_tiles(b):
 					if belts[a.x][a.y]:
 						belts[a.x][a.y].reset()
 						belts[a.x][a.y].new_source(belts[b.x][b.y].get_facing())
+				# Disconnect the previous belt and b
+				_on_Cut_request(b)
 		belts[y][x].queue_free()
 	belts[y][x] = belt
+	# For each neighbour of the belt
 	for a in neighbour_tiles(Vector2(y, x)):
 		var n = belts[a.x][a.y]
-		# print (a, ' ', belts[a.x][a.y])
+		# If there is a belt n on this tile, and it's pointing at towards us 
 		if n and Vector2(y, x) == pointing_at(a, n.get_facing()):
-			# print('there is a source')
+			# Update n visually
 			belt.new_source(n.get_facing())
-	var sink = pointing_at(Vector2(y, x), belt.facing)
-	# print('facing ', sink)
+			# Connect the output from n to this belt
+			_on_Connect_request(n)
+			_on_Connect_request(belt)
+	# Holding shift while placing a belt broke things earlier, not sure why
+	# but this fixes whatever problem was happening
 	if Input.is_action_pressed("shift"):
 		return
+	# Get the tile the belt is pointing at
+	var sink = pointing_at(Vector2(y, x), belt.facing)
+	# If there is a belt on the tile this belt faces
 	if belts[sink.x][sink.y]:
-		# print('there is a sink')
+		# Update the tile visually
 		belts[sink.x][sink.y].new_source(belt.facing)
+		# Connect the output of this belt to that belt
+		_on_Connect_request(belts[y][x])
+		_on_Connect_request(belts[sink.x][sink.y])
+	# One final check that this belt will be linear if it has no sources
 	if belt.num_perp_sinks == 0:
 		belt.set_linear()
 

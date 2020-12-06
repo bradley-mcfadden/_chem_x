@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scripts/CanvasLayer.gd" type="Script" id=1]
 [ext_resource path="res://Placeable Scenes/Sink.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/RecipeAccordionMenu.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Toolbar.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Newspapers/Newspaper_2.tscn" type="PackedScene" id=16]
 
 [node name="2_intro_crafting" type="Node2D"]
 script = ExtResource( 5 )
@@ -84,6 +85,10 @@ visible = false
 
 [node name="Production" parent="CanvasLayer" instance=ExtResource( 10 )]
 
+[node name="Newspaper" parent="CanvasLayer" instance=ExtResource( 16 )]
+visible = false
+mouse_filter = 2
+
 [node name="Sounds" type="Node" parent="."]
 
 [node name="PlaceBlock" type="AudioStreamPlayer2D" parent="Sounds"]
@@ -97,9 +102,11 @@ volume_db = 2.0
 [node name="ScoringTimer" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
+[connection signal="goal_complete" from="." to="." method="_on_goal_complete"]
 [connection signal="machine_clicked" from="." to="CanvasLayer" method="_on_World_machine_clicked"]
 [connection signal="clicked" from="BackgroundTiles/Structures" to="." method="_on_Structures_clicked"]
 [connection signal="sound_requested" from="BackgroundTiles/Structures" to="." method="_on_Structures_sound_requested"]
 [connection signal="build_requested" from="CanvasLayer/Hotbar" to="." method="_on_BuildRequested"]
 [connection signal="item_selected" from="CanvasLayer/Hotbar" to="." method="_instance_item"]
+[connection signal="closed" from="CanvasLayer/Newspaper" to="." method="_on_Newspaper_closed"]
 [connection signal="timeout" from="ScoringTimer" to="." method="_on_ScoringTimer_timeout"]

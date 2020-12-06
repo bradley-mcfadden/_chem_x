@@ -1,0 +1,111 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/CloseButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Fonts/vt323_20.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Scenes/Tutorial.gd" type="Script" id=3]
+
+[node name="Tutorial" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 200.0
+margin_top = 100.0
+margin_right = -200.0
+margin_bottom = -100.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+margin_right = 624.0
+margin_bottom = 400.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 617.0
+margin_bottom = 393.0
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+margin_right = 610.0
+margin_bottom = 20.0
+
+[node name="Title" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+margin_right = 590.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+text = "Online Training"
+
+[node name="CloseButton" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 1 )]
+margin_left = 594.0
+margin_right = 610.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 16, 0 )
+
+[node name="TabContainer" type="TabContainer" parent="PanelContainer/VBoxContainer"]
+margin_top = 24.0
+margin_right = 610.0
+margin_bottom = 356.0
+size_flags_vertical = 3
+tabs_visible = false
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 8.0
+margin_right = -566.0
+margin_bottom = -310.0
+text = "1"
+
+[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 8.0
+margin_right = -4.0
+margin_bottom = -4.0
+text = "2"
+
+[node name="Label3" type="Label" parent="PanelContainer/VBoxContainer/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 8.0
+margin_right = -4.0
+margin_bottom = -4.0
+text = "3"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+margin_top = 360.0
+margin_right = 610.0
+margin_bottom = 386.0
+
+[node name="Progress" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+margin_top = 3.0
+margin_right = 482.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+text = "1 / 5"
+
+[node name="PreviousButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 486.0
+margin_right = 562.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 2 )
+text = "Previous"
+
+[node name="NextButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 566.0
+margin_right = 610.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 2 )
+text = "Next"
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer2/PreviousButton" to="." method="_on_PreviousButton_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer2/NextButton" to="." method="_on_NextButton_pressed"]
