@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scripts/CanvasLayer.gd" type="Script" id=1]
 [ext_resource path="res://Placeable Scenes/Sink.tscn" type="PackedScene" id=2]
@@ -16,6 +16,9 @@
 [ext_resource path="res://Scenes/RecipeAccordionMenu.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Toolbar.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Newspapers/Newspaper_2.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/HelpButton.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/AudioStreamPlayer2D.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Sounds/past-sadness-by-kevin-macleod-from-filmmusic-io.wav" type="AudioStream" id=19]
 
 [node name="2_intro_crafting" type="Node2D"]
 script = ExtResource( 5 )
@@ -86,8 +89,8 @@ visible = false
 [node name="Production" parent="CanvasLayer" instance=ExtResource( 10 )]
 
 [node name="Newspaper" parent="CanvasLayer" instance=ExtResource( 16 )]
-visible = false
-mouse_filter = 2
+
+[node name="HelpButton" parent="CanvasLayer" instance=ExtResource( 17 )]
 
 [node name="Sounds" type="Node" parent="."]
 
@@ -99,6 +102,10 @@ volume_db = -40.742
 stream = ExtResource( 8 )
 volume_db = 2.0
 
+[node name="AudioStreamPlayer2D" parent="Sounds" instance=ExtResource( 18 )]
+stream = ExtResource( 19 )
+autoplay = true
+
 [node name="ScoringTimer" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
@@ -108,5 +115,4 @@ autostart = true
 [connection signal="sound_requested" from="BackgroundTiles/Structures" to="." method="_on_Structures_sound_requested"]
 [connection signal="build_requested" from="CanvasLayer/Hotbar" to="." method="_on_BuildRequested"]
 [connection signal="item_selected" from="CanvasLayer/Hotbar" to="." method="_instance_item"]
-[connection signal="closed" from="CanvasLayer/Newspaper" to="." method="_on_Newspaper_closed"]
 [connection signal="timeout" from="ScoringTimer" to="." method="_on_ScoringTimer_timeout"]

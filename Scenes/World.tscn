@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scripts/Structures.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/world.gd" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Scripts/Line2D.gd" type="Script" id=14]
 [ext_resource path="res://Scenes/Production.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Newspaper.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/HelpButton.tscn" type="PackedScene" id=17]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 2 )
@@ -24,6 +25,7 @@ p_goals = [ {
 "item_id": "74rWEmTdVh0f2WhC",
 "rate": 0.5
 } ]
+valid_buildings = [ 0, 1, 2, 3 ]
 
 [node name="BackgroundTiles" type="TileMap" parent="."]
 position = Vector2( 16, 16 )
@@ -88,6 +90,8 @@ visible = false
 [node name="Newspaper" parent="CanvasLayer" instance=ExtResource( 16 )]
 visible = false
 mouse_filter = 2
+
+[node name="HelpButton" parent="CanvasLayer" instance=ExtResource( 17 )]
 
 [node name="Sounds" type="Node" parent="."]
 

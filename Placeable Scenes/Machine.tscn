@@ -1,10 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Placeable Scenes/PlaceableItem.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Machine.gd" type="Script" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
 
-[sub_resource type="Curve" id=1]
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 1, 0.72549, 0, 0.352941 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="Curve" id=2]
 
 [node name="Machine" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -31,9 +37,13 @@ margin_top = -16.0
 margin_right = 16.0
 margin_bottom = 16.0
 focus_mode = 0
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 4 )
 disabled = true
 enabled_focus_mode = 0
-flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -41,6 +51,6 @@ __meta__ = {
 [node name="Contents" type="Sprite" parent="." index="6"]
 
 [node name="Line2D" type="Line2D" parent="." index="7"]
-width_curve = SubResource( 1 )
+width_curve = SubResource( 2 )
 [connection signal="timeout" from="Timer" to="." method="check_output"]
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

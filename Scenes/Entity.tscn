@@ -29,12 +29,12 @@ __meta__ = {
 }
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( -64, -64, 64, -64, 64, 64, -64, 64 )
+polygon = PoolVector2Array( 64, 64, 64, -64, -64, -64, -64, 64 )
 
 [node name="GoalArea" type="Area2D" parent="."]
 collision_layer = 64
 collision_mask = 64
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GoalArea"]
-polygon = PoolVector2Array( -16, -16, 16, -16, 16, 16, -16, 16 )
+polygon = PoolVector2Array( -32, 32, 32, 32, 32, -32, -32, -32 )
 disabled = true

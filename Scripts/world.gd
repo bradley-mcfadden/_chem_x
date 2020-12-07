@@ -38,6 +38,7 @@ func _ready():
 	for i in range(len(structures)):
 		if i in valid_buildings:
 			valid.append(structures[i])
+	structures = valid
 	$CanvasLayer/Hotbar.add_items(valid)
 	structures_node.setup_world_size(world_rect)
 	Global.load_items()
@@ -74,6 +75,8 @@ func _unhandled_input(_event):
 				# 	pass
 
 func _input(_event):
+	if Input.is_action_just_pressed("hide_ui"):
+		$CanvasLayer/Hotbar.hide()
 	if Input.is_action_just_pressed("next_level"):
 		emit_signal("goal_complete")
 	if current_ghost:

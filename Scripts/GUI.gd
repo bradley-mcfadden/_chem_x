@@ -41,16 +41,20 @@ func add_items(items):
 		button.connect("button_up2", self, "_on_hotbar_clicked")
 		buttons.append(button)
 		var bcont := PanelContainer.new()
+		bcont.mouse_filter = MOUSE_FILTER_IGNORE
 		var vbox := VBoxContainer.new()
+		vbox.mouse_filter = MOUSE_FILTER_IGNORE
 		var blabel := Label.new()
 		var text := key_value
 		blabel.text = text
 		blabel.add_color_override("font_color", Color(255, 255, 255))
 		blabel.add_font_override("font", load("res://Fonts/vt323_20.tres"))
+		blabel.mouse_filter = MOUSE_FILTER_IGNORE
 		vbox.add_child(blabel)
 		bcont.add_child(button)
 		bcont.add_child(vbox)
 		current_row.add_child(bcont)
+		# current_row.add_child(button)
 		item_count += 1
 
 func _on_hotbar_clicked(b):

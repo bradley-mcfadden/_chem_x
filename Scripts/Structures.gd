@@ -76,6 +76,8 @@ func add_belt(belt, x, y):
 						belts[a.x][a.y].reset()
 						belts[a.x][a.y].new_source(belts[b.x][b.y].get_facing())
 				# Disconnect the previous belt and b
+				_on_Disconnect_request(belt[y][x])
+				_on_Disconnect_request(b)
 				_on_Cut_request(b)
 		belts[y][x].queue_free()
 	belts[y][x] = belt
@@ -178,9 +180,9 @@ func _on_Disconnect_request(machine:Object):
 			line_mappings[line_id_a].queue_free()
 			line_mappings.erase(line_id_a)
 		elif line_id_b in line_mappings:
-			disconnect_req_a.disconnect("output_ready", disconnect_req_b, "check_input")
-			disconnect_req_b.disconnect("input_response", disconnect_req_a, "check_output_response")
-			disconnect_req_a.disconnect("pass_item", disconnect_req_b, "push_to_inventory")
+			disconnect_req_b.disconnect("output_ready", disconnect_req_a, "check_input")
+			disconnect_req_a.disconnect("input_response", disconnect_req_b, "check_output_response")
+			disconnect_req_b.disconnect("pass_item", disconnect_req_a, "push_to_inventory")
 			$Connections.remove_child(line_mappings[line_id_b])
 			line_mappings[line_id_b].queue_free()
 			line_mappings.erase(line_id_b)
@@ -209,12 +211,14 @@ func _on_Cut_request(machine:Object):
 					# update neighbours
 					var sink = pointing_at(Vector2(i, j), machine.facing)
 					if belts[sink.x][sink.y]:
+						machine.destroy_contents()
 						belts[sink.x][sink.y].reset()
 						for b in neighbour_tiles(sink):
 							if belts[b.x][b.y] and pointing_at(b, belts[b.x][b.y].facing) == sink:
 								belts[sink.x][sink.y].new_source(belts[b.x][b.y].facing)
 					belts[i][j] = null
 				structures[i][j] = null
+				remove_child(machine)
 				machine.queue_free()
 				break
 

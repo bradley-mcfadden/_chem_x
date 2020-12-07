@@ -22,7 +22,11 @@ func _on_LevelFinished():
 	change_level()
 
 func _on_StartGame_button_up():
+	$AudioStreamPlayer2D.stop()
 	change_level()
 
 func _on_Quit_button_up():
 	get_tree().quit()
+
+func _on_VideoPlayer_finished():
+	$MarginContainer/VideoPlayer.play()

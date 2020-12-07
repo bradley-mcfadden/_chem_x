@@ -35,14 +35,14 @@ animations = [ {
 "name": "left_corner",
 "speed": 20.0
 }, {
-"frames": [ ExtResource( 15 ), ExtResource( 10 ), ExtResource( 5 ), ExtResource( 21 ), ExtResource( 24 ), ExtResource( 11 ), ExtResource( 22 ), ExtResource( 25 ) ],
-"loop": true,
-"name": "linear",
-"speed": 20.0
-}, {
 "frames": [ ExtResource( 16 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 19 ), ExtResource( 23 ), ExtResource( 17 ), ExtResource( 3 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "right_corner",
+"speed": 20.0
+}, {
+"frames": [ ExtResource( 15 ), ExtResource( 10 ), ExtResource( 5 ), ExtResource( 21 ), ExtResource( 24 ), ExtResource( 11 ), ExtResource( 22 ), ExtResource( 25 ) ],
+"loop": true,
+"name": "linear",
 "speed": 20.0
 } ]
 
@@ -57,7 +57,7 @@ texture = ExtResource( 27 )
 [node name="AnimatedSprite" parent="." index="1"]
 frames = SubResource( 1 )
 animation = "linear"
-frame = 5
+frame = 7
 
 [node name="Area2D" parent="." index="2"]
 collision_layer = 1
@@ -93,7 +93,6 @@ collision_layer = 64
 collision_mask = 64
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MID_L" index="0"]
-visible = false
 polygon = PoolVector2Array( -2, -14, -6, -14, -6, 14, -2, 14 )
 disabled = true
 
@@ -116,12 +115,12 @@ polygon = PoolVector2Array( -13, -16, 13, -16, 13, -15, -13, -15 )
 disabled = true
 
 [node name="END_L" type="Area2D" parent="." index="16"]
-visible = false
 collision_layer = 64
 collision_mask = 64
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="END_L" index="0"]
-polygon = PoolVector2Array( 5, -15, 5, -16, -13, -16, -13, -15 )
+visible = false
+polygon = PoolVector2Array( -13, -16, -13, -13, 13, -13, 13, -16 )
 disabled = true
 
 [node name="END_R" type="Area2D" parent="." index="17"]
@@ -130,6 +129,6 @@ collision_mask = 64
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="END_R" index="0"]
 visible = false
-polygon = PoolVector2Array( -5, -16, -5, -15, 13, -15, 13, -16 )
+polygon = PoolVector2Array( -13, -16, -13, -13, 13, -13, 13, -16 )
 disabled = true
 [connection signal="tree_exiting" from="." to="." method="_on_Belt_A_tree_exiting"]

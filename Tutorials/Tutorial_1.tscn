@@ -1,0 +1,218 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Fonts/vt323_20.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Scripts/Tutorial.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/CloseButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Tutorials/webm/Chem-X building example.webm" type="VideoStream" id=4]
+[ext_resource path="res://Tutorials/webm/ChemX ConnectDisconnect.webm" type="VideoStream" id=5]
+[ext_resource path="res://Tutorials/webm/Chem-X BuildCut.webm" type="VideoStream" id=6]
+[ext_resource path="res://Scripts/TutorialPlayer.gd" type="Script" id=7]
+[ext_resource path="res://Tutorials/webm/level_win_demo.webm" type="VideoStream" id=8]
+
+
+[node name="Tutorial" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 200.0
+margin_top = 100.0
+margin_right = -200.0
+margin_bottom = -100.0
+mouse_filter = 2
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+margin_right = 624.0
+margin_bottom = 400.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 617.0
+margin_bottom = 393.0
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+margin_right = 610.0
+margin_bottom = 20.0
+
+[node name="Title" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+margin_right = 590.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 1 )
+text = "Online Training: Placing Machines, Removing Machines, Connections"
+
+[node name="CloseButton" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 3 )]
+margin_left = 594.0
+margin_right = 610.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 16, 0 )
+
+[node name="TabContainer" type="TabContainer" parent="PanelContainer/VBoxContainer"]
+margin_top = 24.0
+margin_right = 610.0
+margin_bottom = 356.0
+size_flags_vertical = 3
+tabs_visible = false
+script = ExtResource( 7 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 8.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/TabContainer/VBoxContainer"]
+margin_right = 602.0
+margin_bottom = 273.0
+size_flags_vertical = 3
+custom_constants/margin_right = 35
+custom_constants/margin_left = 35
+
+[node name="VideoPlayer2" type="VideoPlayer" parent="PanelContainer/VBoxContainer/TabContainer/VBoxContainer/MarginContainer"]
+margin_left = 35.0
+margin_right = 567.0
+margin_bottom = 273.0
+size_flags_vertical = 3
+stream = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/TabContainer/VBoxContainer"]
+margin_top = 277.0
+margin_right = 602.0
+margin_bottom = 320.0
+custom_fonts/font = ExtResource( 1 )
+text = "Use the mouse to select the machine you wish to build, then place in a valid spot by clicking when green. Rotate with R and Shift+R."
+autowrap = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 8.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/TabContainer/VBoxContainer2"]
+margin_right = 40.0
+margin_bottom = 40.0
+size_flags_vertical = 3
+custom_constants/margin_right = 35
+custom_constants/margin_left = 35
+
+[node name="VideoPlayer" type="VideoPlayer" parent="PanelContainer/VBoxContainer/TabContainer/VBoxContainer2/MarginContainer"]
+margin_left = 35.0
+margin_right = 35.0
+margin_bottom = 40.0
+size_flags_vertical = 3
+stream = ExtResource( 6 )
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/TabContainer/VBoxContainer2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 10.0
+margin_right = -8.0
+margin_bottom = -2.0
+custom_fonts/font = ExtResource( 1 )
+text = "To destroy machines, use the Cut(X) tool to get rid of them, and any connections."
+autowrap = true
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 8.0
+margin_right = -4.0
+margin_bottom = -4.0
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/TabContainer/VBoxContainer3"]
+margin_right = 602.0
+margin_bottom = 250.0
+size_flags_vertical = 3
+custom_constants/margin_right = 55
+custom_constants/margin_left = 55
+
+[node name="VideoPlayer3" type="VideoPlayer" parent="PanelContainer/VBoxContainer/TabContainer/VBoxContainer3/MarginContainer"]
+margin_left = 55.0
+margin_right = 547.0
+margin_bottom = 250.0
+size_flags_vertical = 3
+stream = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/TabContainer/VBoxContainer3"]
+margin_top = 254.0
+margin_right = 602.0
+margin_bottom = 320.0
+custom_fonts/font = ExtResource( 1 )
+text = "To use the Connect(C) and Disconnect(V) tools. Just click on the source machine, then on the sink machine. To disconnect, click on any two connected machine. Belts automatically connect to other belts by default."
+autowrap = true
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 8.0
+margin_right = -4.0
+margin_bottom = -4.0
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/TabContainer/VBoxContainer4"]
+margin_right = 602.0
+margin_bottom = 250.0
+size_flags_vertical = 3
+custom_constants/margin_right = 35
+custom_constants/margin_left = 35
+
+[node name="VideoPlayer3" type="VideoPlayer" parent="PanelContainer/VBoxContainer/TabContainer/VBoxContainer4/MarginContainer"]
+margin_left = 35.0
+margin_right = 567.0
+margin_bottom = 250.0
+size_flags_vertical = 3
+stream = ExtResource( 8 )
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/TabContainer/VBoxContainer4"]
+margin_top = 254.0
+margin_right = 602.0
+margin_bottom = 320.0
+custom_fonts/font = ExtResource( 1 )
+text = "Each level, you must reach the production goal on the left to proceed. Items can be take from crates and put onto pallets."
+autowrap = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+margin_top = 360.0
+margin_right = 610.0
+margin_bottom = 386.0
+
+[node name="Progress" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+margin_top = 3.0
+margin_right = 482.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 1 )
+text = "1 / 5"
+
+[node name="PreviousButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 486.0
+margin_right = 562.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 1 )
+text = "Previous"
+
+[node name="NextButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 566.0
+margin_right = 610.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 1 )
+text = "Next"
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
+[connection signal="tab_changed" from="PanelContainer/VBoxContainer/TabContainer" to="PanelContainer/VBoxContainer/TabContainer" method="_on_TabContainer_tab_changed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer2/PreviousButton" to="." method="_on_PreviousButton_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer2/NextButton" to="." method="_on_NextButton_pressed"]
