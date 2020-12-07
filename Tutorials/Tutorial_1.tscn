@@ -168,7 +168,7 @@ size_flags_vertical = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/TabContainer/VBoxContainer4"]
 margin_right = 602.0
-margin_bottom = 250.0
+margin_bottom = 273.0
 size_flags_vertical = 3
 custom_constants/margin_right = 35
 custom_constants/margin_left = 35
@@ -176,17 +176,17 @@ custom_constants/margin_left = 35
 [node name="VideoPlayer3" type="VideoPlayer" parent="PanelContainer/VBoxContainer/TabContainer/VBoxContainer4/MarginContainer"]
 margin_left = 35.0
 margin_right = 567.0
-margin_bottom = 250.0
+margin_bottom = 273.0
 size_flags_vertical = 3
 stream = ExtResource( 8 )
 volume_db = -80.0
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer/TabContainer/VBoxContainer4"]
-margin_top = 254.0
+margin_top = 277.0
 margin_right = 602.0
 margin_bottom = 320.0
 custom_fonts/font = ExtResource( 1 )
-text = "Each level, you must reach the production goal on the left to proceed. Items can be take from crates and put onto pallets."
+text = "Each level, you must reach the production goal on the left to proceed. To do this, take from crates and put ready items onto pallets."
 autowrap = true
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]

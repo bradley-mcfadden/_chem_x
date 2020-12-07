@@ -131,5 +131,6 @@ autostart = true
 [connection signal="sound_requested" from="BackgroundTiles/Structures" to="." method="_on_Structures_sound_requested"]
 [connection signal="build_requested" from="CanvasLayer/Hotbar" to="." method="_on_BuildRequested"]
 [connection signal="item_selected" from="CanvasLayer/Hotbar" to="." method="_instance_item"]
+[connection signal="closed" from="CanvasLayer/Newspaper" to="." method="_on_Newspaper_closed"]
 [connection signal="pressed" from="CanvasLayer/HelpButton" to="CanvasLayer/Tutorial" method="_on_HelpButton_pressed"]
 [connection signal="timeout" from="ScoringTimer" to="." method="_on_ScoringTimer_timeout"]
