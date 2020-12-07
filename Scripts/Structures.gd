@@ -44,9 +44,6 @@ func add_struct(struct, x, y):
 	struct.connect("cut_request", self, "_on_Cut_request")
 	struct.connect("disconnect_request", self, "_on_Disconnect_request")
 
-func add_poller(_poller, _x, _y):
-	print('New poller at:', _y, ' ', _x)
-
 func add_belt(belt, x, y):
 	for s in neighbour_tiles(Vector2(y, x)):
 		var strx = structures[s.x][s.y]
@@ -55,9 +52,6 @@ func add_belt(belt, x, y):
 	var opt = pointing_at(Vector2(y, x), belt.output_dir)
 	if opt and structures[opt.x][opt.y]:
 		pass
-	#
-	#
-	# print('New node at:', y, ' ', x)
 	if x < 0 or y < 0 or x >= world_size.x or y >= world_size.y:
 		belt.queue_free()
 		return

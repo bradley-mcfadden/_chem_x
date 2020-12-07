@@ -214,13 +214,13 @@ func left_handler(_a):
 
 # called before deletion
 func _on_Belt_A_tree_exiting():
-	print("tree exiting")
+	# print("tree exiting")
 	# delete any entities on belt when it's deleted
-	print(e_inventory.size)
+	# print(e_inventory.size)
 	destroy_contents()
 
 func destroy_contents():
 	while e_inventory.is_empty():
 		var e = e_inventory.pop()
-		print('deleting %s' % e)
+		# print('deleting %s' % e)
 		e.queue_free()

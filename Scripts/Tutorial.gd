@@ -45,7 +45,7 @@ func _on_CloseButton_pressed():
 
 
 func _on_HelpButton_pressed():
-	print('ci')
+	# print('ci')
 	if tab_count > 0:
 		tabs.current_tab = 0
 		show()

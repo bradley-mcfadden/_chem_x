@@ -211,6 +211,9 @@ func set_normal_state():
 	$BackgroundTiles/Structures/Connections.visible = false
 
 func _on_goal_complete():
+	if has_node("Sounds/AudioStreamPlayer2D"):
+		$Sounds/AudioStreamPlayer2D.stop()
+	$Sounds/Success.play()
 	$CanvasLayer/Newspaper.show()
 
 func _on_Newspaper_closed():

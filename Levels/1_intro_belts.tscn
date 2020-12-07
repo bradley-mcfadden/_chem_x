@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Scripts/CanvasLayer.gd" type="Script" id=1]
 [ext_resource path="res://Placeable Scenes/Sink.tscn" type="PackedScene" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://Sounds/sweeter-vermouth-by-kevin-macleod-from-filmmusic-io.wav" type="AudioStream" id=20]
 [ext_resource path="res://Sounds/cutting_sound.wav" type="AudioStream" id=21]
 [ext_resource path="res://Sounds/207321__patricklieberkind__machine-shutdown.wav" type="AudioStream" id=22]
+[ext_resource path="res://Sounds/success.wav" type="AudioStream" id=23]
 
 [sub_resource type="Gradient" id=1]
 
@@ -30,7 +31,7 @@ script = ExtResource( 5 )
 world_rect = Vector2( 31, 21 )
 p_goals = [ {
 "item_id": "74rWEmTdVh0f2WhC",
-"rate": 1.2
+"rate": 1.0
 } ]
 valid_buildings = [ 0 ]
 
@@ -111,11 +112,10 @@ mouse_filter = 2
 
 [node name="PlaceBlock" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource( 9 )
-volume_db = -40.742
 
 [node name="Drill" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource( 8 )
-volume_db = 2.0
+volume_db = 24.0
 
 [node name="AudioStreamPlayer2D" parent="Sounds" instance=ExtResource( 19 )]
 stream = ExtResource( 20 )
@@ -126,6 +126,9 @@ stream = ExtResource( 22 )
 
 [node name="Cutting" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource( 21 )
+
+[node name="Success" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 23 )
 
 [node name="ResetTimer" type="Timer" parent="."]
 
@@ -139,4 +142,5 @@ autostart = true
 [connection signal="build_requested" from="CanvasLayer/Hotbar" to="." method="_on_BuildRequested"]
 [connection signal="item_selected" from="CanvasLayer/Hotbar" to="." method="_instance_item"]
 [connection signal="closed" from="CanvasLayer/Newspaper" to="." method="_on_Newspaper_closed"]
+[connection signal="pressed" from="CanvasLayer/HelpButton" to="CanvasLayer/Tutorial" method="_on_HelpButton_pressed"]
 [connection signal="timeout" from="ScoringTimer" to="." method="_on_ScoringTimer_timeout"]
