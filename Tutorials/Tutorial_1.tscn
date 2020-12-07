@@ -9,7 +9,6 @@
 [ext_resource path="res://Scripts/TutorialPlayer.gd" type="Script" id=7]
 [ext_resource path="res://Tutorials/webm/level_win_demo.webm" type="VideoStream" id=8]
 
-
 [node name="Tutorial" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -80,6 +79,7 @@ margin_right = 567.0
 margin_bottom = 273.0
 size_flags_vertical = 3
 stream = ExtResource( 4 )
+volume_db = -80.0
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer/TabContainer/VBoxContainer"]
 margin_top = 277.0
@@ -111,6 +111,7 @@ margin_right = 35.0
 margin_bottom = 40.0
 size_flags_vertical = 3
 stream = ExtResource( 6 )
+volume_db = -80.0
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer/TabContainer/VBoxContainer2"]
 anchor_right = 1.0
@@ -145,6 +146,7 @@ margin_right = 547.0
 margin_bottom = 250.0
 size_flags_vertical = 3
 stream = ExtResource( 5 )
+volume_db = -80.0
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer/TabContainer/VBoxContainer3"]
 margin_top = 254.0
@@ -177,6 +179,7 @@ margin_right = 567.0
 margin_bottom = 250.0
 size_flags_vertical = 3
 stream = ExtResource( 8 )
+volume_db = -80.0
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer/TabContainer/VBoxContainer4"]
 margin_top = 254.0

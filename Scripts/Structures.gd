@@ -186,6 +186,7 @@ func _on_Disconnect_request(machine:Object):
 			$Connections.remove_child(line_mappings[line_id_b])
 			line_mappings[line_id_b].queue_free()
 			line_mappings.erase(line_id_b)
+		emit_signal("sound_requested", "power_down")
 		clear_connect_requests()
 
 func _on_Cut_request(machine:Object):
@@ -220,6 +221,7 @@ func _on_Cut_request(machine:Object):
 				structures[i][j] = null
 				remove_child(machine)
 				machine.queue_free()
+				emit_signal("sound_requested", "cut")
 				break
 
 func clear_connect_requests():

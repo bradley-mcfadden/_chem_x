@@ -76,6 +76,7 @@ margin_right = 567.0
 margin_bottom = 273.0
 size_flags_vertical = 3
 stream = ExtResource( 5 )
+volume_db = -80.0
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer/TabContainer/VBoxContainer"]
 margin_top = 277.0

@@ -158,6 +158,10 @@ func _on_Structures_sound_requested(sound_name):
 	match sound_name:
 		"drill":
 			$Sounds/Drill.play()
+		"cut":
+			$Sounds/Cutting.play()
+		"power_down":
+			$Sounds/PowerDown.play()
 
 func _on_ScoringTimer_timeout():
 	elapsed_time += $ScoringTimer.wait_time
