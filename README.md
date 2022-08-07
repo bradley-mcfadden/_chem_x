@@ -1,5 +1,5 @@
 
-[!chem-x logo](https://github.com/bradley-mcfadden/_chem_x/blob/main/Assets/chem_x_logo.png)
+[!chem-x logo](Assets/chem_x_logo.png)
 ---
 # Chem-X
 
