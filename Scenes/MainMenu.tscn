@@ -101,6 +101,7 @@ text = "Quit Game"
 [node name="AudioStreamPlayer2D" parent="." instance=ExtResource( 6 )]
 stream = ExtResource( 5 )
 autoplay = true
+
 [connection signal="finished" from="MarginContainer/VideoPlayer" to="." method="_on_VideoPlayer_finished"]
 [connection signal="button_up" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StartGame" to="." method="_on_StartGame_button_up"]
 [connection signal="button_up" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Quit" to="." method="_on_Quit_button_up"]

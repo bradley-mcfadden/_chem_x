@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/past-sadness-by-kevin-macleod-from-filmmusic-io.mp3-e001a603b3542220e34aa63d58fc4ae5.mp3str"
+
+[deps]
+
+source_file="res://Sounds/past-sadness-by-kevin-macleod-from-filmmusic-io.mp3"
+dest_files=[ "res://.import/past-sadness-by-kevin-macleod-from-filmmusic-io.mp3-e001a603b3542220e34aa63d58fc4ae5.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

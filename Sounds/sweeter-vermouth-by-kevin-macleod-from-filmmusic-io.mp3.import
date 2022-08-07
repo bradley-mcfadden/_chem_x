@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/sweeter-vermouth-by-kevin-macleod-from-filmmusic-io.mp3-9c611cfe41f6c69d5313560227de54e5.mp3str"
+
+[deps]
+
+source_file="res://Sounds/sweeter-vermouth-by-kevin-macleod-from-filmmusic-io.mp3"
+dest_files=[ "res://.import/sweeter-vermouth-by-kevin-macleod-from-filmmusic-io.mp3-9c611cfe41f6c69d5313560227de54e5.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
