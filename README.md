@@ -1,4 +1,9 @@
+
+[!chem-x logo](https://github.com/bradley-mcfadden/_chem_x/blob/main/Assets/chem_x_logo.png)
+---
 # Chem-X
+
+
 
 Chem-X was a game demo for an automation centered game that I created for a project in my third year of university.
 The idea was that you would play as a process engineer and be given a particular set of items to create as well as
