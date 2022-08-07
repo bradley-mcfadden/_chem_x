@@ -1,5 +1,5 @@
 
-[!chem-x logo](title_screen.png)
+![chem-x logo](https://github.com/bradley-mcfadden/_chem_x/blob/main/title.png?raw=true)
 ---
 # Chem-X
 
@@ -20,4 +20,4 @@ Additionally, some of the media files should have used different containers or c
 of the game was quite big for the handful of levels it was. If I were to ever revisit this, I'd have a lot of organization work
 to do first.
 
-[!level1 screenshot](level.png)
+![level1 screenshot](https://github.com/bradley-mcfadden/_chem_x/blob/main/level1.png?raw=true)
